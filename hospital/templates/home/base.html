@@ -1,0 +1,33 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" href="{% static "images/favicon.ico" %}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{% static "images/favicon.ico" %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static "hospital/css/base.css" %}" type="text/css" />
+    <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+    <script src="{% static "hospital/js/base.js" %}"></script>
+  </head>
+  <body>
+    <header>
+      {% block header %}
+        Header
+      {% endblock %}
+    </header>
+    <div class="content">
+      {% include "home/language_switch.html" %}
+      {% block content %}
+        Content
+      {% endblock %}
+    </div>
+    <footer>
+      {% block footer %}
+        Footer
+      {% endblock %}
+    </footer>
+  </body>
+</html>

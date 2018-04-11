@@ -1,0 +1,11 @@
+{% extends 'home/base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+  <h1>{% trans "Main page" %}</h1>
+  <ul>
+    <li><a href="/parameters/">{% trans "Parameters" %}</a></li>
+    <li><a href="/parameters_set/">{% trans "Parameters bulk" %}</a></li>
+  </ul>
+{% endblock %}

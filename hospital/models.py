@@ -13,6 +13,10 @@ class AbstractTimestampModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    @property
+    def id(self):
+        return self._id
+
     class Meta:
         abstract = True
 
@@ -40,7 +44,7 @@ class Project(AbstractTimestampModel):
 
 class Form(AbstractTimestampModel):
     name = models.CharField(max_length=30)
-    fields = models.ArrayReferenceField(to='hospital.Parameter')
+    fields = models.ArrayReferenceField(to='hospital.Parameter', null=True, blank=True)
 
 
 class Application(AbstractTimestampModel):
@@ -48,8 +52,3 @@ class Application(AbstractTimestampModel):
     client = models.ForeignKey('hospital.Client', on_delete=models.CASCADE)
     project = models.ForeignKey('hospital.Project', on_delete=models.CASCADE)
     values = models.ArrayModelField(model_container=ParameterValue)
-
-    objects = models.DjongoManager
-
-
-

@@ -1,0 +1,15 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+    <h1>Parameters</h1>
+    <ul>
+        {% for parameter in object_list %}
+        <li>
+            <a href="{% url "parameter_edit" parameter.id %}">{{ parameter.name }}</a>
+            <a href="{% url "parameter_delete" parameter.id %}">delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url "parameter_new" %}">New</a>
+{% endblock %}

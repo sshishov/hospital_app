@@ -1,0 +1,30 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+div.content {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
+header,
+footer {
+  text-align: center;
+  height: 100px;
+  font-size: 20px;
+  background-color: lightblue;
+  line-height: 100px;
+}
+
+div.language-switch {
+  text-align: right;
+}
+

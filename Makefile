@@ -30,3 +30,6 @@ test: clean
 	mkdir -p xmlrunner
 	coverage erase
 	pytest $(TEST_ARGS) $(TARGET)
+
+translate:
+	python manage.py makemessages --no-location --no-obsolete --no-wrap --locale ru

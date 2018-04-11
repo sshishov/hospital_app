@@ -84,6 +84,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'hospital.urls'
@@ -167,12 +168,17 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 LANGUAGES = [
     ('ru', _('Russian')),
     ('en', _('English')),
 ]
+
+LOCALE_PATHS = (
+    os.path.join(os.path.dirname(BASE_DIR), 'locale'),
+)
+print(LOCALE_PATHS)
 
 TIME_ZONE = 'UTC'
 
@@ -187,6 +193,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(os.path.dirname(BASE_DIR), 'static'),
+)
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
 
 APP_NAME = env('APP_NAME')
 

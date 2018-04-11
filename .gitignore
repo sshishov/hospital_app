@@ -97,6 +97,7 @@ ENV/
 
 # End of https://www.gitignore.io/api/python
 
+.DS_Store
 .idea/
 xmlrunner/
 docker/github
