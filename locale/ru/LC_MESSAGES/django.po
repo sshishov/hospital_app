@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-11 20:39+0000\n"
+"POT-Creation-Date: 2018-04-12 07:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,11 +24,59 @@ msgstr "Русский"
 msgid "English"
 msgstr "Английский"
 
-msgid "Main page"
-msgstr "Главная страница"
+msgid "Patient"
+msgstr "Пациент"
+
+msgid "Patients"
+msgstr "Пациенты"
+
+msgid "Parameter"
+msgstr "Параметр"
 
 msgid "Parameters"
 msgstr "Параметры"
 
-msgid "Parameters bulk"
+msgid "Project"
+msgstr "Проект"
+
+msgid "Projects"
+msgstr "Проекты"
+
+msgid "Form"
+msgstr "Форма"
+
+msgid "Forms"
+msgstr "Формы"
+
+msgid "Application"
+msgstr "Запись"
+
+msgid "Applications"
+msgstr "Записи"
+
+msgid "Header"
+msgstr "Заголовок"
+
+msgid "Content"
+msgstr "Содержание"
+
+msgid "Footer"
+msgstr "Подвал"
+
+msgid "Main page"
+msgstr "Главная страница"
+
+msgid "Parameters (all-in-one)"
 msgstr "Параметры (все в одном)"
+
+msgid "Patients (all-in-one)"
+msgstr "Пациенты (все в одном)"
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Add"
+msgstr "Добавить"

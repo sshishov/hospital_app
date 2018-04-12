@@ -17,12 +17,11 @@ def manage_parameters(request):
     if request.method == 'POST':
         formset = hospital_forms.ParameterFormSet(request.POST, request.FILES)
         if formset.is_valid():
-            # do something with the formset.cleaned_data
             formset.save()
             formset = hospital_forms.ParameterFormSet()
     else:
         formset = hospital_forms.ParameterFormSet()
-    return render(request, 'hospital/parameter_set.html', {'formset': formset})
+    return render(request, 'hospital/base_formset.html', {'formset': formset})
 
 
 class ParameterList(ListView):
@@ -31,16 +30,48 @@ class ParameterList(ListView):
 
 class ParameterCreate(CreateView):
     model = hospital_models.Parameter
-    success_url = reverse_lazy('parameter_list')
+    success_url = reverse_lazy('parameter-list')
     fields = ('name', 'description')
 
 
 class ParameterUpdate(UpdateView):
     model = hospital_models.Parameter
-    success_url = reverse_lazy('parameter_list')
+    success_url = reverse_lazy('parameter-list')
     fields = ('name', 'description')
 
 
 class ParameterDelete(DeleteView):
     model = hospital_models.Parameter
-    success_url = reverse_lazy('parameter_list')
+    success_url = reverse_lazy('parameter-list')
+
+
+def manage_patients(request):
+    if request.method == 'POST':
+        formset = hospital_forms.PatientFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
+            formset = hospital_forms.PatientFormSet()
+    else:
+        formset = hospital_forms.PatientFormSet()
+    return render(request, 'hospital/base_formset.html', {'formset': formset})
+
+
+class PatientList(ListView):
+    model = hospital_models.Patient
+
+
+class PatientCreate(CreateView):
+    model = hospital_models.Patient
+    success_url = reverse_lazy('patient-list')
+    fields = ('name',)
+
+
+class PatientUpdate(UpdateView):
+    model = hospital_models.Patient
+    success_url = reverse_lazy('patient-list')
+    fields = ('name',)
+
+
+class PatientDelete(DeleteView):
+    model = hospital_models.Patient
+    success_url = reverse_lazy('patient-list')

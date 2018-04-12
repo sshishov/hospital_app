@@ -5,7 +5,9 @@
 {% block content %}
   <h1>{% trans "Main page" %}</h1>
   <ul>
-    <li><a href="/parameters/">{% trans "Parameters" %}</a></li>
-    <li><a href="/parameters_set/">{% trans "Parameters bulk" %}</a></li>
+    <li><a href="{% url "parameter-list" %}">{% trans "Parameters" %}</a></li>
+    <li><a href="{% url "parameter-set" %}">{% trans "Parameters (all-in-one)" %}</a></li>
+    <li><a href="{% url "patient-list" %}">{% trans "Patients" %}</a></li>
+    <li><a href="{% url "patient-set" %}">{% trans "Patients (all-in-one)" %}</a></li>
   </ul>
 {% endblock %}

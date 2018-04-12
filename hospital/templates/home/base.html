@@ -15,18 +15,18 @@
   <body>
     <header>
       {% block header %}
-        Header
+        {% trans "Header" %}
       {% endblock %}
     </header>
     <div class="content">
       {% include "home/language_switch.html" %}
       {% block content %}
-        Content
+        {%  trans "Content" %}
       {% endblock %}
     </div>
     <footer>
       {% block footer %}
-        Footer
+        {% trans "Footer" %}
       {% endblock %}
     </footer>
   </body>

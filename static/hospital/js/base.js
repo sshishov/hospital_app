@@ -1,3 +1,3 @@
-$(document).delegate(["header", "footer"], "click", function() {
+$(document).delegate("header, footer", "click", function() {
     window.location = "/";
 });

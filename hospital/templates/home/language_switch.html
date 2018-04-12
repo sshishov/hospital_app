@@ -8,7 +8,7 @@
     {% ifnotequal LANGUAGE_CODE language.0 %}
       <form method="post" action="{% url "set_language" %}">
         <input type="hidden" name="language" value="{{ language.0 }}" />
-        <button type="submit">{{ language.0 }}</button>
+        <button type="submit">{{ language.1 }}</button>
       </form>
     {% endifnotequal %}
   {% endfor %}
