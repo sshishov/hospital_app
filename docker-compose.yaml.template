@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=hospital
+      - MONGO_DATA_DIR=/data/mongo/db
+    volumes:
+      - ./data/mongo/db:/data/db
+      - ./conf/mongo/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - 27017:27017
+#    command: mongod --smallfiles --logpath=/dev/null # --quiet
