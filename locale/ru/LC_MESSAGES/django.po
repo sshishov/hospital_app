@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-12 07:14+0000\n"
+"POT-Creation-Date: 2018-04-12 12:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,11 +24,26 @@ msgstr "Русский"
 msgid "English"
 msgstr "Английский"
 
+msgid "ID"
+msgstr "№"
+
+msgid "Updated"
+msgstr "Обновлено"
+
+msgid "Added"
+msgstr "Добавлено"
+
+msgid "Name"
+msgstr "Наименование"
+
 msgid "Patient"
 msgstr "Пациент"
 
 msgid "Patients"
 msgstr "Пациенты"
+
+msgid "Description"
+msgstr "Описание"
 
 msgid "Parameter"
 msgstr "Параметр"
@@ -36,17 +51,29 @@ msgstr "Параметр"
 msgid "Parameters"
 msgstr "Параметры"
 
+msgid "Value"
+msgstr "Значение"
+
 msgid "Project"
 msgstr "Проект"
 
 msgid "Projects"
 msgstr "Проекты"
 
+msgid "Fields"
+msgstr "Поля"
+
 msgid "Form"
 msgstr "Форма"
 
 msgid "Forms"
 msgstr "Формы"
+
+msgid "Doctor"
+msgstr "Доктор"
+
+msgid "Values"
+msgstr "Значения"
 
 msgid "Application"
 msgstr "Запись"
@@ -66,11 +93,8 @@ msgstr "Подвал"
 msgid "Main page"
 msgstr "Главная страница"
 
-msgid "Parameters (all-in-one)"
-msgstr "Параметры (все в одном)"
-
-msgid "Patients (all-in-one)"
-msgstr "Пациенты (все в одном)"
+msgid "(all-in-one)"
+msgstr "(все в одном)"
 
 msgid "Apply"
 msgstr "Применить"

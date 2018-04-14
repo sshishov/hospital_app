@@ -10,20 +10,44 @@ from . import views as hospital_views
 
 urlpatterns = [
     path(route=settings.ADMIN_URL, view=admin.site.urls),
-    path(route='', view=hospital_views.HomeView.as_view()),
+    path(route='', view=hospital_views.home.HomeView.as_view()),
     path(route='i18n/', view=include('django.conf.urls.i18n')),
 
-    path(route='parameters_set/', view=hospital_views.manage_parameters, name='parameter-set'),
-    path(route='parameters/', view=hospital_views.ParameterList.as_view(), name='parameter-list'),
-    path(route='parameters/create/', view=hospital_views.ParameterCreate.as_view(), name='parameter-create'),
-    path(route='parameters/<uuid:pk>/update/', view=hospital_views.ParameterUpdate.as_view(), name='parameter-update'),
-    path(route='parameters/<uuid:pk>/delete/', view=hospital_views.ParameterDelete.as_view(), name='parameter-delete'),
+    path(route='parameters_set/', view=hospital_views.parameters.manage_parameters, name='parameter-set'),
+    path(route='parameters/', view=hospital_views.parameters.ParameterList.as_view(), name='parameter-list'),
+    path(route='parameters/create/', view=hospital_views.parameters.ParameterCreate.as_view(), name='parameter-create'),
+    path(route='parameters/<uuid:pk>/update/', view=hospital_views.parameters.ParameterUpdate.as_view(), name='parameter-update'),
+    path(route='parameters/<uuid:pk>/delete/', view=hospital_views.parameters.ParameterDelete.as_view(), name='parameter-delete'),
 
-    path(route='patients_set/', view=hospital_views.manage_patients, name='patient-set'),
-    path(route='patients/', view=hospital_views.PatientList.as_view(), name='patient-list'),
-    path(route='patients/create/', view=hospital_views.PatientCreate.as_view(), name='patient-create'),
-    path(route='patients/<uuid:pk>/update/', view=hospital_views.PatientUpdate.as_view(), name='patient-update'),
-    path(route='patients/<uuid:pk>/delete/', view=hospital_views.PatientDelete.as_view(), name='patient-delete'),
+    path(route='patients_set/', view=hospital_views.patients.manage_patients, name='patient-set'),
+    path(route='patients/', view=hospital_views.patients.PatientList.as_view(), name='patient-list'),
+    path(route='patients/create/', view=hospital_views.patients.PatientCreate.as_view(), name='patient-create'),
+    path(route='patients/<uuid:pk>/update/', view=hospital_views.patients.PatientUpdate.as_view(), name='patient-update'),
+    path(route='patients/<uuid:pk>/delete/', view=hospital_views.patients.PatientDelete.as_view(), name='patient-delete'),
+
+    path(route='projects_set/', view=hospital_views.projects.manage_projects, name='project-set'),
+    path(route='projects/', view=hospital_views.projects.ProjectList.as_view(), name='project-list'),
+    path(route='projects/create/', view=hospital_views.projects.ProjectCreate.as_view(), name='project-create'),
+    path(route='projects/<uuid:pk>/update/', view=hospital_views.projects.ProjectUpdate.as_view(),
+         name='project-update'),
+    path(route='projects/<uuid:pk>/delete/', view=hospital_views.projects.ProjectDelete.as_view(),
+         name='project-delete'),
+
+    path(route='forms_set/', view=hospital_views.forms.manage_forms, name='form-set'),
+    path(route='forms/', view=hospital_views.forms.FormList.as_view(), name='form-list'),
+    path(route='forms/create/', view=hospital_views.forms.FormCreate.as_view(), name='form-create'),
+    path(route='forms/<uuid:pk>/update/', view=hospital_views.forms.FormUpdate.as_view(),
+         name='form-update'),
+    path(route='forms/<uuid:pk>/delete/', view=hospital_views.forms.FormDelete.as_view(),
+         name='form-delete'),
+
+    path(route='applications_set/', view=hospital_views.applications.manage_applications, name='application-set'),
+    path(route='applications/', view=hospital_views.applications.ApplicationList.as_view(), name='application-list'),
+    path(route='applications/create/', view=hospital_views.applications.ApplicationCreate.as_view(), name='application-create'),
+    path(route='applications/<uuid:pk>/update/', view=hospital_views.applications.ApplicationUpdate.as_view(),
+         name='application-update'),
+    path(route='applications/<uuid:pk>/delete/', view=hospital_views.applications.ApplicationDelete.as_view(),
+         name='application-delete'),
 ]
 
 

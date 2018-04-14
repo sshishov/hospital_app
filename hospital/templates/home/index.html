@@ -6,8 +6,18 @@
   <h1>{% trans "Main page" %}</h1>
   <ul>
     <li><a href="{% url "parameter-list" %}">{% trans "Parameters" %}</a></li>
-    <li><a href="{% url "parameter-set" %}">{% trans "Parameters (all-in-one)" %}</a></li>
+    <li><a href="{% url "parameter-set" %}">{% trans "Parameters" %} {% trans "(all-in-one)" %}</a></li>
+    <hr/>
     <li><a href="{% url "patient-list" %}">{% trans "Patients" %}</a></li>
-    <li><a href="{% url "patient-set" %}">{% trans "Patients (all-in-one)" %}</a></li>
+    <li><a href="{% url "patient-set" %}">{% trans "Patients" %} {% trans "(all-in-one)" %}</a></li>
+    <hr/>
+    <li><a href="{% url "project-list" %}">{% trans "Projects" %}</a></li>
+    <li><a href="{% url "project-set" %}">{% trans "Projects" %} {% trans "(all-in-one)" %}</a></li>
+    <hr/>
+    <li><a href="{% url "form-list" %}">{% trans "Forms" %}</a></li>
+    <li><a href="{% url "form-set" %}">{% trans "Forms" %} {% trans "(all-in-one)" %}</a></li>
+    <hr/>
+    <li><a href="{% url "application-list" %}">{% trans "Applications" %}</a></li>
+    <li><a href="{% url "application-set" %}">{% trans "Applications" %} {% trans "(all-in-one)" %}</a></li>
   </ul>
 {% endblock %}

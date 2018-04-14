@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 
 
 class AbstractTimestampModel(models.Model):
-    _id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name=_('ID'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Updated'))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Added'))
 
     @property
     def id(self):
@@ -23,7 +23,7 @@ class AbstractTimestampModel(models.Model):
 
 
 class Patient(AbstractTimestampModel):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, verbose_name=_('Name'))
 
     class Meta:
         verbose_name = _('Patient')
@@ -31,8 +31,8 @@ class Patient(AbstractTimestampModel):
 
 
 class Parameter(AbstractTimestampModel):
-    name = models.CharField(max_length=30)
-    description = models.TextField()
+    name = models.CharField(max_length=30, verbose_name=_('Name'))
+    description = models.TextField(verbose_name=_('Description'))
 
     class Meta:
         verbose_name = _('Parameter')
@@ -40,15 +40,15 @@ class Parameter(AbstractTimestampModel):
 
 
 class ParameterValue(AbstractTimestampModel):
-    parameter = models.EmbeddedModelField(model_container=Parameter)
-    value = models.CharField(max_length=100)
+    parameter = models.EmbeddedModelField(model_container=Parameter, verbose_name=_('Parameter'))
+    value = models.CharField(max_length=100, verbose_name=_('Value'))
 
     class Meta:
         abstract = True
 
 
 class Project(AbstractTimestampModel):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, verbose_name=_('Name'))
 
     class Meta:
         verbose_name = _('Project')
@@ -56,8 +56,9 @@ class Project(AbstractTimestampModel):
 
 
 class Form(AbstractTimestampModel):
-    name = models.CharField(max_length=30)
-    fields = models.ArrayReferenceField(to='hospital.Parameter', null=True, blank=True)
+    name = models.CharField(max_length=30, verbose_name=_('Name'))
+    fields = models.ArrayReferenceField(to='hospital.Parameter', null=True, blank=True, verbose_name=_('Fields'))
+    # fields = models.ManyToManyField(to='hospital.Parameter', verbose_name=_('Fields'))
 
     class Meta:
         verbose_name = _('Form')
@@ -65,10 +66,10 @@ class Form(AbstractTimestampModel):
 
 
 class Application(AbstractTimestampModel):
-    doctor = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    patient = models.ForeignKey('hospital.Patient', on_delete=models.CASCADE)
-    project = models.ForeignKey('hospital.Project', on_delete=models.CASCADE)
-    values = models.ArrayModelField(model_container=ParameterValue)
+    doctor = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name=_('Doctor'))
+    patient = models.ForeignKey('hospital.Patient', on_delete=models.CASCADE, verbose_name=_('Patient'))
+    project = models.ForeignKey('hospital.Project', on_delete=models.CASCADE, verbose_name=_('Project'))
+    values = models.ArrayModelField(model_container=ParameterValue, verbose_name=_('Values'))
 
     class Meta:
         verbose_name = _('Application')
