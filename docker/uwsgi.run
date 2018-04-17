@@ -1,4 +1,5 @@
 #!/bin/ash
-
+su $APP_USER -c "$VENV_BIN/python $APP_DIR/manage.py collectstatic --no-input"
+su $APP_USER -c "$VENV_BIN/python $APP_DIR/manage.py compilemessages -l ru"
 su $APP_USER -c "$VENV_BIN/python $APP_DIR/manage.py migrate"
 /usr/sbin/uwsgi --ini /home/hospital/app/docker/uwsgi.ini

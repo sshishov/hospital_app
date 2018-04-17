@@ -59,10 +59,6 @@ RUN set -e; \
     su $APP_USER -c "envtpl -o $APP_DIR/docker/nginx.conf $APP_DIR/docker/nginx.conf.tpl --keep-template" && \
     ln -s $APP_DIR/docker/nginx.conf /etc/nginx/conf.d/app.conf;
 
-RUN set -e; \
-    su $APP_USER -l -c "$VENV_BIN/python $APP_DIR/manage.py collectstatic --no-input"; \
-    su $APP_USER -l -c "$VENV_BIN/python $APP_DIR/manage.py compilemessages";
-
 EXPOSE 8000
 
 WORKDIR $APP_DIR

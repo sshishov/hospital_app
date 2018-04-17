@@ -14,3 +14,14 @@ services:
     ports:
       - 27017:27017
 #    command: mongod --smallfiles --logpath=/dev/null # --quiet
+  hospital_app:
+    image: sshishov/hospital_app:latest
+    container_name: hospital_app
+    ports:
+      - 8013:8000
+    depends_on:
+      - mongodb
+    links:
+      - mongodb:mongodb
+    env_file:
+      - ./envs/hospital_app.env
