@@ -1,13 +1,28 @@
 TARGET ?= ./
-APP_NAME = content_first_service
-BEANSTALK_APP_NAME = content-first-service
-IMAGE_NAME ?= dubizzledotcom/$(APP_NAME)
-IMAGE_VERSION ?= $(shell docker/tag_helper.sh)
-SOURCE_BUNDLE_ARCHIVE_NAME = $(BEANSTALK_APP_NAME)-$(IMAGE_VERSION).zip
+APP_NAME = hospital_app
+IMAGE_NAME ?= sshishov/$(APP_NAME)
 GIT_REF = $(shell git rev-parse HEAD)
 TEST_ARGS ?= --cov=$(TARGET) --verbose --cov-report=xml --cov-report=term --junitxml=xmlrunner/unittest.xml
 
 .PHONY: docker
+
+docker-local:
+	tar -pczf /tmp/archive.tar.gz --exclude=".git" --exclude="*.pyc" --exclude="local_settings.py" .
+	mv /tmp/archive.tar.gz docker/archive.tar.gz
+	$(MAKE) docker-common
+
+docker-git:
+	git archive --format tar.gz --output docker/archive.tar.gz $(GIT_REF)
+	$(MAKE) docker-common
+
+docker-common:
+	docker build -t $(IMAGE_NAME):latest -f docker/Dockerfile .
+	$(MAKE) clean-docker
+
+docker: docker-git
+
+clean-docker:
+	-rm -rf docker/archive.tar.gz
 
 clean-pyc:
 	find . -name "*.pyc" -exec rm -f {} \;

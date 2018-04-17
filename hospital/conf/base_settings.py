@@ -9,9 +9,12 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
+import itertools
 import logging.config
 import os
 import sys
+
+import dj_database_url
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -35,7 +38,8 @@ env = Env(
     H_VERIFY_SSL={'cast': bool, 'default': True},
 
     # Default database
-    H_DB_DEFAULT={'cast': str, 'default': 'mysql://hospital:hospital@127.0.0.1/hospital'},
+    # H_DB_DEFAULT={'cast': str, 'default': 'mysql://hospital:hospital@127.0.0.1/hospital'},
+    H_DB_DEFAULT={'cast': str, 'default': 'djongo://hospital:hospital@127.0.0.1/hospital'},
 
     # Redis
     H_REDIS={'cast': str, 'default': 'redis://127.0.0.1:6379/'},
@@ -119,15 +123,13 @@ CACHES = {
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+dj_database_url.SCHEMES['djongo'] = 'djongo'
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'hospital',
-        'USER': 'hospital',
-        'PASSWORD': 'hospital',
-        'HOST': '127.0.0.1',
-        'AUTH_SOURCE': 'hospital',
-        'ENFORCE_SCHEMA': False,
+        key: value for key, value in itertools.chain(
+            dj_database_url.parse(env('H_DB_DEFAULT')).items(),
+            {'AUTH_SOURCE': 'hospital', 'ENFORCE_SCHEMA': False}.items()
+        )
     }
 }
 
