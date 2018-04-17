@@ -13,7 +13,8 @@ RUN apk update && apk add \
     py3-virtualenv \
     nginx \
     uwsgi-python3 \
-    gettext
+    gettext \
+    git
 
 ENV TERM=xterm \
     # ensure local python is preferred over distribution python
