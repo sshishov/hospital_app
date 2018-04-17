@@ -17,7 +17,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from envparse import Env
 
-import mongoengine
+#import mongoengine
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
