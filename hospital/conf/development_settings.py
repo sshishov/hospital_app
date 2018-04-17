@@ -1,7 +1,7 @@
 import os
 
 # Application
-os.environ['APP_NAME'] = os.environ.get('APP_NAME', 'content_first_service')
+os.environ['APP_NAME'] = os.environ.get('APP_NAME', 'hospital_app')
 
 # Django standard configuration
 os.environ['H_DJANGO_SECRET_KEY'] = os.environ.get('H_DJANGO_SECRET_KEY', 'development_secret')

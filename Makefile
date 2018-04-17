@@ -1,6 +1,7 @@
 TARGET ?= ./
 APP_NAME = hospital_app
 IMAGE_NAME ?= sshishov/$(APP_NAME)
+IMAGE_VERSION ?= latest
 GIT_REF = $(shell git rev-parse HEAD)
 TEST_ARGS ?= --cov=$(TARGET) --verbose --cov-report=xml --cov-report=term --junitxml=xmlrunner/unittest.xml
 
@@ -16,10 +17,13 @@ docker-git:
 	$(MAKE) docker-common
 
 docker-common:
-	docker build -t $(IMAGE_NAME):latest -f docker/Dockerfile .
+	docker build -t $(IMAGE_NAME):$(IMAGE_VERSION) -f docker/Dockerfile .
 	$(MAKE) clean-docker
 
 docker: docker-git
+
+docker-push:
+	docker push $(IMAGE_NAME):$(IMAGE_VERSION)
 
 clean-docker:
 	-rm -rf docker/archive.tar.gz

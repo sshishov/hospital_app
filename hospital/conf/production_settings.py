@@ -1,8 +1,8 @@
 import os
 
 # Django standard configuration
-os.environ['H_DJANGO_ALLOWED_HOSTS'] = os.environ.get('H_DJANGO_ALLOWED_HOSTS', '.dubizzle.com')
-os.environ['H_DJANGO_ADMIN_URL'] = os.environ.get('H_DJANGO_ADMIN_URL', 'dubizzle_admin')
+os.environ['H_DJANGO_ALLOWED_HOSTS'] = os.environ.get('H_DJANGO_ALLOWED_HOSTS', '.hospitalapp.com')
+os.environ['H_DJANGO_ADMIN_URL'] = os.environ.get('H_DJANGO_ADMIN_URL', 'hospital_admin')
 
 # Redis
 os.environ['H_REDIS'] = os.environ.get('H_REDIS', 'redis://<redis_url>:6379/')

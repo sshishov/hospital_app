@@ -18,7 +18,7 @@ server {
     }
 
     location /static {
-        alias {{ APP_DIR }}/static;
+        alias {{ APP_DIR }}/staticfiles;
     }
 
     # Finally, send all non-media requests to the Django server.

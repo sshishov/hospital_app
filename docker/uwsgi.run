@@ -1,0 +1,4 @@
+#!/bin/ash
+
+su $APP_USER -c "$VENV_BIN/python $APP_DIR/manage.py migrate"
+/usr/sbin/uwsgi --ini /home/hospital/app/docker/uwsgi.ini

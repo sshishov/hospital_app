@@ -12,7 +12,8 @@ RUN apk update && apk add \
     uwsgi \
     py3-virtualenv \
     nginx \
-    uwsgi-python3
+    uwsgi-python3 \
+    gettext
 
 ENV TERM=xterm \
     # ensure local python is preferred over distribution python
@@ -57,7 +58,9 @@ RUN set -e; \
     su $APP_USER -c "envtpl -o $APP_DIR/docker/nginx.conf $APP_DIR/docker/nginx.conf.tpl --keep-template" && \
     ln -s $APP_DIR/docker/nginx.conf /etc/nginx/conf.d/app.conf;
 
-# RUN ln -s $APP_DIR/docker/nginx.conf /etc/nginx/conf.d/app
+RUN set -e; \
+    su $APP_USER -l -c "$VENV_BIN/python $APP_DIR/manage.py collectstatic --no-input"; \
+    su $APP_USER -l -c "$VENV_BIN/python $APP_DIR/manage.py compilemessages";
 
 EXPOSE 8000
 
