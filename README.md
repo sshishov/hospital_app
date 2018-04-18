@@ -10,7 +10,7 @@ Django + MongoDB
  
 ## Installation (Development):
  - go inside `docker/compose` folder
- - run `docker-compose up mongodb` (or `docker-compose up mongodb -d` to start in background)
+ - run `docker-compose up mongodb` (or `docker-compose up -d mongodb` to start in background)
  - after this to start MongoDB you should just type `docker-compose start mongodb`
  - create virtualenv with Python3 and install requirements:
  ```bash
