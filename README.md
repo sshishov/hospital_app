@@ -19,6 +19,7 @@ Django + MongoDB
  - pip instal virtualenv
  - to have python 3.6
  mkvirtualenv --python=python3.6 hospital_app
+ - go inside `hospital_app'` folder
  pip install -r requirements/development.txt
  ```
  - run migrations and compile static
