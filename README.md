@@ -15,7 +15,7 @@ Django + MongoDB
  - after this to start MongoDB you should just type `docker-compose start mongodb`
  - create virtualenv with Python3 and install requirements:
  ```bash
- mkvirtualenv --python=python3 hospital_app
+ mkvirtualenv --python=python3.6 hospital_app
  pip install -r requirements/development.txt
  ```
  - run migrations and compile static
