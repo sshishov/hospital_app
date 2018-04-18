@@ -9,12 +9,15 @@ Django + MongoDB
 
  
 ## Installation (Development):
-## djongo requires Python '>=3.6 
  - go inside `docker/compose` folder
  - run `docker-compose up mongodb` (or `docker-compose up -d mongodb` to start in background)
  - after this to start MongoDB you should just type `docker-compose start mongodb`
  - create virtualenv with Python3 and install requirements:
  ```bash
+ - to have pytone's ver 2.7 (as default)
+ - pip install virtualenv-wrapper
+ - pip instal virtualenv
+ - to have python 3.6
  mkvirtualenv --python=python3.6 hospital_app
  pip install -r requirements/development.txt
  ```
