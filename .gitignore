@@ -102,3 +102,4 @@ ENV/
 xmlrunner/
 docker/github
 docker/archive.tar.gz
+staticfiles/

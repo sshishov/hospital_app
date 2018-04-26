@@ -19,6 +19,7 @@
       {% endblock %}
     </header>
     <div class="content">
+      {% include "home/user_interface.html" %}
       {% include "home/language_switch.html" %}
       {% block content %}
         {%  trans "Content" %}
