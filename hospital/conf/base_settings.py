@@ -76,6 +76,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'stronghold',
+
     'hospital',
 ]
 
@@ -89,6 +91,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+
+    'stronghold.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'hospital.urls'
@@ -257,22 +261,22 @@ LOGGING = {
         },
     },
     'loggers': {
+        'django.db': {
+            'handlers': ['file', 'stdout', 'logstash'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+            'propagate': False,
+        },
         'django.request': {
             'handlers': ['file', 'stdout', 'logstash'],
             'level': 'DEBUG' if DEBUG else 'INFO',
             'propagate': False,
         },
-        'core': {
+        'hospital': {
             'handlers': ['file', 'stdout', 'logstash'],
             'level': 'DEBUG' if DEBUG else 'INFO',
             'propagate': True,
         },
-        'content_first_service': {
-            'handlers': ['file', 'stdout', 'logstash'],
-            'level': 'DEBUG' if DEBUG else 'INFO',
-            'propagate': True,
-        },
-        'komsary': {
+        'djongo': {
             'handlers': ['file', 'stdout', 'logstash'],
             'level': 'DEBUG' if DEBUG else 'INFO',
             'propagate': True,
@@ -286,3 +290,13 @@ LOG_REQUEST_ID_HEADER = 'HTTP_X_CORRELATION_ID'
 GENERATE_REQUEST_ID_IF_NOT_IN_HEADER = False
 REQUEST_ID_RESPONSE_HEADER = LOG_REQUEST_ID_HEADER
 LOG_REQUEST_ID_BUS_HEADER = LOG_REQUEST_ID_HEADER[5:].replace('_', '-').upper()
+
+# Auth configuration
+LOGIN_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = LOGIN_URL
+
+# Stronghold
+STRONGHOLD_PUBLIC_NAMED_URLS = (
+    'password_reset',
+    'password_reset_done',
+)

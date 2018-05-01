@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-12 12:20+0000\n"
+"POT-Creation-Date: 2018-04-28 10:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,20 +18,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
+# ---------------------
+# language slection
+# ---------------------
 msgid "Russian"
 msgstr "Русский"
 
 msgid "English"
 msgstr "Английский"
 
+
 msgid "ID"
 msgstr "№"
 
-msgid "Updated"
-msgstr "Обновлено"
-
 msgid "Added"
 msgstr "Добавлено"
+
+msgid "Updated"
+msgstr "Обновлено"
 
 msgid "Name"
 msgstr "Наименование"
@@ -81,6 +85,24 @@ msgstr "Запись"
 msgid "Applications"
 msgstr "Записи"
 
+msgid "Full Name"
+msgstr "ФИО"
+
+msgid "City"
+msgstr "Город"
+
+msgid "Subject"
+msgstr "Субъект РФ"
+
+msgid "District"
+msgstr "Федеральный Округ"
+
+msgid "Profile"
+msgstr "Профиль"
+
+msgid "Profiles"
+msgstr "Профили"
+
 msgid "Header"
 msgstr "Заголовок"
 
@@ -96,11 +118,38 @@ msgstr "Главная страница"
 msgid "(all-in-one)"
 msgstr "(все в одном)"
 
+msgid "Logout"
+msgstr "Выход"
+
 msgid "Apply"
 msgstr "Применить"
+
+msgid "Add"
+msgstr "Добавить"
 
 msgid "Delete"
 msgstr "Удалить"
 
-msgid "Add"
-msgstr "Добавить"
+msgid "Log in"
+msgstr "Войти"
+
+msgid "Forgot password"
+msgstr "Забыли пароль"
+
+msgid "Reset it"
+msgstr "Сбросить"
+
+msgid "Password reset successfully"
+msgstr "Пароль успешно сброшен"
+
+msgid "Submit"
+msgstr "Применить"
+
+msgid "Password reset failed"
+msgstr "Сброс пароля неуспешен"
+
+msgid "Email with password reset instructions has been sent."
+msgstr "Вам было отправлено письмо с инструкциями по сбросу пароля."
+
+msgid "Reset password at %(site_name)s"
+msgstr "Сброс пароля на %(site_name)s"

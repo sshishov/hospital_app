@@ -13,4 +13,7 @@ os.environ['H_VERIFY_SSL'] = os.environ.get('H_VERIFY_SSL', 'false')
 # Logging
 os.environ['LOGSTASH_HOST'] = os.environ.get('LOGSTASH_HOST', '127.0.0.1')
 
+# Dev Email console output
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 from hospital.conf.base_settings import *  # noqa: E501,F401,F403  # pylint:disable=wildcard-import,wrong-import-position

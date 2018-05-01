@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 
 class AbstractTimestampModel(models.Model):
     _id = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name=_('ID'))
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Updated'))
-    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Added'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Added'))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Updated'))
 
     @property
     def id(self):
@@ -38,6 +38,9 @@ class Parameter(AbstractTimestampModel):
         verbose_name = _('Parameter')
         verbose_name_plural = _('Parameters')
 
+    def __str__(self):
+        return self.name
+
 
 class ParameterValue(AbstractTimestampModel):
     parameter = models.EmbeddedModelField(model_container=Parameter, verbose_name=_('Parameter'))
@@ -54,15 +57,22 @@ class Project(AbstractTimestampModel):
         verbose_name = _('Project')
         verbose_name_plural = _('Projects')
 
+    def __str__(self):
+        return self.name
+
 
 class Form(AbstractTimestampModel):
     name = models.CharField(max_length=30, verbose_name=_('Name'))
-    fields = models.ArrayReferenceField(to='hospital.Parameter', null=True, blank=True, verbose_name=_('Fields'))
-    # fields = models.ManyToManyField(to='hospital.Parameter', verbose_name=_('Fields'))
+    # fields = models.ArrayReferenceField(to='hospital.Parameter', null=True, blank=True, verbose_name=_('Fields'))
+    fields = models.ManyToManyField(to='hospital.Parameter', verbose_name=_('Fields'))
 
     class Meta:
         verbose_name = _('Form')
         verbose_name_plural = _('Forms')
+
+    def form_fields(self):
+        fields = [field.name for field in self.fields.all()]
+        return ', '.join(fields)
 
 
 class Application(AbstractTimestampModel):
@@ -74,3 +84,20 @@ class Application(AbstractTimestampModel):
     class Meta:
         verbose_name = _('Application')
         verbose_name_plural = _('Applications')
+
+
+# user extension models
+class UserProfile(AbstractTimestampModel):
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100, verbose_name=_('Full Name'))
+    city = models.CharField(max_length=100, verbose_name=_('City'))
+    subject = models.CharField(max_length=100, verbose_name=_('Subject'))
+    district = models.CharField(max_length=100, verbose_name=_('District'))
+    projects = models.ManyToManyField(to='hospital.Project', verbose_name=_('Projects'))
+
+    class Meta:
+        verbose_name = _('Profile')
+        verbose_name_plural = _('Profiles')
+
+    def __str__(self):
+        return self.full_name

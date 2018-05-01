@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.get_username }}. <a href="{% url 'logout' %}">{% trans "Logout" %}</a></p>
+{% endif %}
