@@ -1,0 +1,17 @@
+{% extends 'home/base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+    <h1>{{ view.model.model_name }}</h1>
+    <ul>
+        {% for object in object_list %}
+        <li>
+            <a href="{% url "project-update" object.id %}">{{ object.name }}</a>
+            <a href="{% url "project-delete" object.id %}">{% trans "Delete" %}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url "project-create" %}">{% trans "Add" %}</a>
+{% endblock %}
