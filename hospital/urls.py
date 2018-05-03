@@ -13,7 +13,7 @@ urlpatterns = [
     path(route='accounts/', view=include('django.contrib.auth.urls')),
 
     path(route=settings.ADMIN_URL, view=admin.site.urls),
-    path(route='', view=hospital_views.home.HomeView.as_view()),
+    path(route='', view=hospital_views.home.HomeView.as_view(), name='index'),
     path(route='i18n/', view=include('django.conf.urls.i18n')),
 
     # parameters views

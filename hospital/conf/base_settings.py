@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'stronghold',
+    'bootstrap3',
 
     'hospital',
 ]
@@ -112,6 +113,11 @@ TEMPLATES = [
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
             ),
+            'builtins': [
+                'django.contrib.staticfiles.templatetags.staticfiles',
+                'django.templatetags.i18n',
+                'bootstrap3.templatetags.bootstrap3',
+            ],
         },
     },
 ]
@@ -300,3 +306,15 @@ STRONGHOLD_PUBLIC_NAMED_URLS = (
     'password_reset',
     'password_reset_done',
 )
+
+# django-bootstrap settings
+BOOTSTRAP3 = {
+    # The URL to the jQuery JavaScript file
+    'jquery_url': os.path.join(os.path.dirname(STATIC_URL), 'hospital/vendor/jquery/jquery.min.js'),
+
+    # The Bootstrap base URL
+    'base_url': os.path.join(os.path.dirname(STATIC_URL), 'hospital/vendor/bootstrap/'),
+
+    # Include jQuery with Bootstrap JavaScript (affects django-bootstrap3 template tags)
+    'include_jquery': True,
+}

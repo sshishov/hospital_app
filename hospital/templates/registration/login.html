@@ -1,14 +1,18 @@
-{% extends "home/base.html" %}
-{% load i18n %}
+{% extends "home/body_auth.html" %}
 
-{% block content %}
-<form method="post" action=".">
-  {% csrf_token %} 
-  {{ form.as_p }}
-
-  <input type="submit" value="{% trans 'Log in' %}" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
-<p>{% trans "Forgot password" %}? <a href="{% url 'password_reset' %}">{% trans "Reset it" %}</a>!</p>
+{% block content_auth %}
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Authentification</div>
+      <div class="card-body">
+        <form method="POST" action=".">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <input type="submit" value="{% trans 'Log in' %}" />
+          <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+        <div class="text-center">
+          <a class="d-block small" href="{% url 'password_reset' %}">{% trans "Forgot password" %}?</a>
+        </div>
+      </div>
+    </div>
 {% endblock %}

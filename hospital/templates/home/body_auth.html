@@ -1,0 +1,9 @@
+{% extends 'home/base.html' %}
+
+{% block body %}
+    <div class="container">
+      {% block content_auth %}
+        {%  trans "Authorization" %}
+      {% endblock %}
+    </div>
+{% endblock %}

@@ -7,3 +7,4 @@ git+https://github.com/sshishov/djongo.git@cf21a0fb60f46add134194605ef04f1605b75
 envparse==0.2.0
 mongoengine==0.15.0
 python-logstash==0.4.6
+django-bootstrap3==9.1.0
