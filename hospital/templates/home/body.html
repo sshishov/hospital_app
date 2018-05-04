@@ -8,24 +8,22 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Project">
-            <a class="nav-link" href="index.html">
-              <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">Select Project</span>
-
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="History and Form">
+            <a class="nav-link" href="{% url 'history_and_form' %}">
+              <i class="fa fa-fw fa-pencil"></i>{% trans 'History and Form' %}
             </a>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pacient">
-            <a class="nav-link" href="charts.html">
-              <i class="fa fa-fw fa-area-chart"></i>
-              <span class="nav-link-text">Select Pacient</span>
-            </a>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Patient">
+            <span class="navbar-text">
+              <i class="fa fa-fw fa-id-card"></i>
+              Select Patient
+            </span>
           </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Form">
-            <a class="nav-link" href="charts.html">
-              <i class="fa fa-fw fa-area-chart"></i>
-              <span class="nav-link-text">Select Form</span>
-            </a>
+            <span class="navbar-text">
+              <i class="fa fa-fw fa-pencil"></i>
+              Select Form
+            </span>
           </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
@@ -36,49 +34,74 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <form class="form-inline" action="{% url 'update_data' %}" method="POST">
+              {% csrf_token %}
+              <input name="next" type="hidden" value="{{ redirect_to }}" />
+              <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-fw fa-briefcase"></i>
+                  </div>
+                </div>
+                <select class="form-control" name="project" onchange="this.form.submit()">
+                  <option value="none"> --- </option>
+                  {% for project in request.user.userprofile.projects.all %}
+                  <option value="{{ project.name }}"{% if project.name == request.session.selected_project %} selected="selected"{% endif %}>
+                    {{ project.name }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </form>
+          </li>
+          <li class="nav-item">
+            <form class="form-inline" action="{% url 'set_language' %}" method="POST">
+              {% csrf_token %}
+              <input name="next" type="hidden" value="{{ redirect_to }}" />
+              <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-fw fa-language"></i>
+                  </div>
+                </div>
+                <select class="form-control" name="language" onchange="this.form.submit()">
+                  {% get_current_language as LANGUAGE_CODE %}
+                  {% get_available_languages as LANGUAGES %}
+                  {% get_language_info_list for LANGUAGES as languages %}
+                  {% for language in languages %}
+                  <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                    {{ language.name_local }} ({{ language.code }})
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </form>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="userMenuDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-fw fa-user-circle"></i>
               {{ user.get_username }}
             </a>
             <div class="dropdown-menu" aria-labelledby="userMenuDropdown">
-              <a class="dropdown-item" href="/accounts/profile">User Profile</a>
+              <a class="dropdown-item" href="{% url 'profile' %}">User Profile</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/admin">Adminpanel</a>
             </div>
           </li>
           <li class="nav-item">
-            <form action="{% url 'set_language' %}" method="POST">
-              {% csrf_token %}
-              <input name="next" type="hidden" value="{{ redirect_to }}" />
-              <select class="form-control" name="language" onchange="this.form.submit()">
-                {% get_current_language as LANGUAGE_CODE %}
-                {% get_available_languages as LANGUAGES %}
-                {% get_language_info_list for LANGUAGES as languages %}
-                {% for language in languages %}
-                  <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
-                    {{ language.name_local }} ({{ language.code }})
-                  </option>
-                {% endfor %}
-              </select>
-            </form>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">
-              <i class="fa fa-fw fa-sign-out"></i>{% trans 'Logout' %}</a>
+              <i class="fa fa-fw fa-sign-out"></i>{% trans 'Logout' %}
+            </a>
           </li>
         </ul>
       </div>
     </nav>
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      {% include "home/user_interface.html" %}
-      {% include "home/language_switch.html" %}
-      {% block content %}
-        {%  trans "Content" %}
-      {% endblock %}
+    <div class="content-wrapper">
+      <div class="container-fluid">
+        {% block content %}{%  trans 'Content' %}{% endblock %}
+      </div>
     </div>
-  </div>
 {% endblock %}
 
 {% block js_content %}

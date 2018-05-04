@@ -11,10 +11,16 @@ from . import views as hospital_views
 urlpatterns = [
     # auth
     path(route='accounts/', view=include('django.contrib.auth.urls')),
+    path(route='accounts/profile/', view=hospital_views.profile.get_profile, name='profile'),
 
+    # common
     path(route=settings.ADMIN_URL, view=admin.site.urls),
     path(route='', view=hospital_views.home.HomeView.as_view(), name='index'),
     path(route='i18n/', view=include('django.conf.urls.i18n')),
+    path(route='history_and_form/', view=hospital_views.history_and_form.manage_view, name='history_and_form'),
+
+    # session settings
+    path(route='accounts/', view=hospital_views.session_settings.update_session_data, name='update_data'),
 
     # parameters views
     path(route='parameters_set/', view=hospital_views.parameters.manage_parameters, name='parameter-set'),
