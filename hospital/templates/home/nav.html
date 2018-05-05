@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+  <a class="navbar-brand" href="{% url 'index' %}">{% trans "Hospital Application" %}</a>
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    {% with request.resolver_match.url_name as url_name %}
+    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+      <li class="nav-item {% if url_name == 'history_and_form' %}active{% endif %}" data-toggle="tooltip" data-placement="right" title="History and Form">
+        <a class="nav-link" href="{% url 'history_and_form' %}">
+          <i class="fa fa-fw fa-pencil"></i>{% trans 'History and Form' %}
+        </a>
+        {% if url_name == 'history_and_form' %}
+          <form action="{% url 'update_data' %}" method="POST">
+            {{ patient_form.patient }}
+          </form>
+          <form action="{% url 'update_data' %}" method="POST">
+            {{ patient_form.form }}
+          </form>
+        {% endif %}
+      </li>
+    </ul>
+    {% endwith %}
+    <ul class="navbar-nav sidenav-toggler">
+      <li class="nav-item">
+        <a class="nav-link text-center" id="sidenavToggler">
+          <i class="fa fa-fw fa-angle-left"></i>
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <form class="form-inline" action="{% url 'update_data' %}" method="POST">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ redirect_to }}" />
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-fw fa-briefcase"></i>
+              </div>
+            </div>
+            <select class="form-control" name="project" onchange="this.form.submit()">
+              {% for project in request.user.userprofile.projects.all %}
+              <option value="{{ project.id }}" {% if project.id|stringformat:'s' == request.session.project %} selected="selected"{% endif %}>
+                {{ project.name }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        </form>
+      </li>
+      <li class="nav-item">
+        {% include "home/language.html" %}
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="userMenuDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-fw fa-user-circle"></i>
+          {{ user.get_username }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="userMenuDropdown">
+          <a class="dropdown-item" href="{% url 'profile' %}">User Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/admin">Adminpanel</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">
+          <i class="fa fa-fw fa-sign-out"></i>{% trans 'Logout' %}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

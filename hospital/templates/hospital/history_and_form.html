@@ -2,4 +2,33 @@
 
 {% block content %}
   <h1>{% trans "History and Form" %}</h1>
+  <ul class="nav nav-tabs" id="history_and_new_form_id">
+    <li class="nav-item">
+      <a class="nav-link active show" id="history_id" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">{% trans "History" %}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="new_form_id" data-toggle="tab" href="#new_form" role="tab" aria-controls="new-form" aria-selected="true">{% trans "New Application" %}</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
+      {% if request.session.patient %}
+        {% for history in history_list %}
+          {{ history.created_at }}: {{ history.name }}
+        {% endfor %}
+     {% else %}
+        <p>{% trans "Select patient to see the history" %}</p>
+      {% endif %}
+    </div>
+    <div class="tab-pane fade" id="new_form" role="tabpanel" aria-labelledby="new-form-tab">
+      {% if form_to_fill %}
+        <form type="post">
+          {{ form_to_fill.as_p }}
+          <input type="submit" value="Submit">
+        </form>
+      {% else %}
+        <p>{% trans "Select patient and form to create new application" %}</p>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}

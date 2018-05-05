@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from mongoengine import fields, document
 from djongo import models
+from django import forms
 
 logger = logging.getLogger(__name__)
 
@@ -31,12 +32,28 @@ class Patient(AbstractTimestampModel):
 
 
 class Parameter(AbstractTimestampModel):
+
+    PARAMETER_TYPE_INTEGER = 1
+    PARAMETER_TYPE_STRING = 2
+    PARAMETER_TYPES = (
+        (PARAMETER_TYPE_INTEGER, _('Integer')),
+        (PARAMETER_TYPE_STRING, _('String')),
+    )
+    PARAMETER_TYPE_MAP = {
+        PARAMETER_TYPE_INTEGER: forms.IntegerField(),
+        PARAMETER_TYPE_STRING: forms.CharField(),
+    }
+
     name = models.CharField(max_length=30, verbose_name=_('Name'))
     description = models.TextField(verbose_name=_('Description'))
+    type = models.IntegerField(choices=PARAMETER_TYPES, verbose_name=_('Type'))
 
     class Meta:
         verbose_name = _('Parameter')
         verbose_name_plural = _('Parameters')
+
+    def get_type(self):
+        return self.PARAMETER_TYPE_MAP[self.type]
 
     def __str__(self):
         return self.name
