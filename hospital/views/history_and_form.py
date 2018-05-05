@@ -1,18 +1,34 @@
 from django.shortcuts import render
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 from hospital import models as hospital_models
+
+
+class PatientSelect(forms.Select):
+    def __init__(self, attrs=None):
+        super(PatientSelect, self).__init__(attrs)
+        self.patients = {patient._id: patient.birthday for patient in
+                         hospital_models.Patient.objects.all()}
+
+    def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
+        option = super(PatientSelect, self).create_option(name, value, label, selected, index, subindex=None, attrs=None)
+        date_string = self.patients[value].strftime('%d.%m.%Y')
+        option['attrs']['data-subtext'] = date_string
+        return option
 
 
 class SelectForm(forms.Form):
     patient = forms.ModelChoiceField(
         queryset=hospital_models.Patient.objects.all(),
-        widget=forms.Select(
+        widget=PatientSelect(
             attrs={
                 'class': 'selectpicker',
                 'onchange': 'this.form.submit()',
                 'data-live-search': 'true',
-                'title': 'Choose Patient',
+                'data-show-subtext': 'true',
+                'title': _('Choose Patient'),
+                'data-width': '500px',
             }
         ),
         empty_label=None,
@@ -24,7 +40,7 @@ class SelectForm(forms.Form):
                 'class': 'selectpicker',
                 'onchange': 'this.form.submit()',
                 'data-live-search': 'true',
-                'title': 'Choose Form',
+                'title': _('Choose Form'),
             }
         ),
         empty_label=None,

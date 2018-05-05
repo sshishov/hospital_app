@@ -7,8 +7,7 @@
     <title>{% block title %}Title{% endblock %}</title>
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
-    <link rel="stylesheet" href="{% static 'hospital/css/base.css' %}" type="text/css" />
-    <link href="{% static 'hospital/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    {% block css %}{% endblock %}
     {% bootstrap_css %}
   </head>
   <body class="fixed-nav sticky-footer bg-dark" id="page-top">

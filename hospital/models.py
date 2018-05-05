@@ -24,11 +24,15 @@ class AbstractTimestampModel(models.Model):
 
 
 class Patient(AbstractTimestampModel):
-    name = models.CharField(max_length=50, verbose_name=_('Name'))
+    full_name = models.CharField(max_length=100, verbose_name=_('Full Name'))
+    birthday = models.DateField(verbose_name=_('Birthday'))
 
     class Meta:
         verbose_name = _('Patient')
         verbose_name_plural = _('Patients')
+
+    def __str__(self):
+        return self.full_name
 
 
 class Parameter(AbstractTimestampModel):
@@ -90,6 +94,9 @@ class Form(AbstractTimestampModel):
     def form_fields(self):
         fields = [field.name for field in self.fields.all()]
         return ', '.join(fields)
+
+    def __str__(self):
+        return self.name
 
 
 class Application(AbstractTimestampModel):

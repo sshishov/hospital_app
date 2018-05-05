@@ -6,18 +6,17 @@
   <div class="collapse navbar-collapse" id="navbarResponsive">
     {% with request.resolver_match.url_name as url_name %}
     <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+      <li class="nav-item {% if url_name == 'patient-create' %}active{% endif %}" data-toggle="tooltip" data-placement="right" title="Create Patient">
+        <a class="nav-link" href="{% url 'patient-create' %}">
+          <i class="fa fa-fw fa-address-card"></i>
+          {% trans 'Patient Creation' %}
+        </a>
+      </li>
       <li class="nav-item {% if url_name == 'history_and_form' %}active{% endif %}" data-toggle="tooltip" data-placement="right" title="History and Form">
         <a class="nav-link" href="{% url 'history_and_form' %}">
-          <i class="fa fa-fw fa-pencil"></i>{% trans 'History and Form' %}
+          <i class="fa fa-fw fa-pencil"></i>
+          {% trans 'History and Form' %}
         </a>
-        {% if url_name == 'history_and_form' %}
-          <form action="{% url 'update_data' %}" method="POST">
-            {{ patient_form.patient }}
-          </form>
-          <form action="{% url 'update_data' %}" method="POST">
-            {{ patient_form.form }}
-          </form>
-        {% endif %}
       </li>
     </ul>
     {% endwith %}

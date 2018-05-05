@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-28 10:55+0000\n"
+"POT-Creation-Date: 2018-05-05 22:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,6 @@ msgstr "Русский"
 msgid "English"
 msgstr "Английский"
 
-
 msgid "ID"
 msgstr "№"
 
@@ -37,8 +36,11 @@ msgstr "Добавлено"
 msgid "Updated"
 msgstr "Обновлено"
 
-msgid "Name"
-msgstr "Наименование"
+msgid "Full Name"
+msgstr "Фамилия Имя Отчество"
+
+msgid "Birthday"
+msgstr "Дата рождения"
 
 msgid "Patient"
 msgstr "Пациент"
@@ -46,8 +48,20 @@ msgstr "Пациент"
 msgid "Patients"
 msgstr "Пациенты"
 
+msgid "Integer"
+msgstr "Целое число"
+
+msgid "String"
+msgstr "Строка"
+
+msgid "Name"
+msgstr "Наименование"
+
 msgid "Description"
 msgstr "Описание"
+
+msgid "Type"
+msgstr "Тип"
 
 msgid "Parameter"
 msgstr "Параметр"
@@ -85,9 +99,6 @@ msgstr "Запись"
 msgid "Applications"
 msgstr "Записи"
 
-msgid "Full Name"
-msgstr "ФИО"
-
 msgid "City"
 msgstr "Город"
 
@@ -103,14 +114,11 @@ msgstr "Профиль"
 msgid "Profiles"
 msgstr "Профили"
 
-msgid "Header"
-msgstr "Заголовок"
-
 msgid "Content"
 msgstr "Содержание"
 
-msgid "Footer"
-msgstr "Подвал"
+msgid "Authorization"
+msgstr "Авторизация"
 
 msgid "Main page"
 msgstr "Главная страница"
@@ -118,8 +126,26 @@ msgstr "Главная страница"
 msgid "(all-in-one)"
 msgstr "(все в одном)"
 
+msgid "Hospital Application"
+msgstr "Приложение для больниц"
+
+msgid "Patient Creation"
+msgstr "Добавление пациента"
+
+msgid "History and Form"
+msgstr "История и Форма"
+
 msgid "Logout"
 msgstr "Выход"
+
+msgid "User profile"
+msgstr "Пользовательский Профиль"
+
+msgid "Username"
+msgstr "Имя пользователя"
+
+msgid "Available Projects"
+msgstr "Доступные проекты"
 
 msgid "Apply"
 msgstr "Применить"
@@ -130,14 +156,26 @@ msgstr "Добавить"
 msgid "Delete"
 msgstr "Удалить"
 
+msgid "History"
+msgstr "История"
+
+msgid "New Application"
+msgstr "Новая запись"
+
+msgid "Select patient to see the history"
+msgstr "Выберите пациента, чтобы увидеть его историю"
+
+msgid "Select patient and form to create new application"
+msgstr "Выберите пациента и форму, чтобы создать новую запись"
+
+msgid "Authentication"
+msgstr "Авторизация"
+
 msgid "Log in"
 msgstr "Войти"
 
 msgid "Forgot password"
 msgstr "Забыли пароль"
-
-msgid "Reset it"
-msgstr "Сбросить"
 
 msgid "Password reset successfully"
 msgstr "Пароль успешно сброшен"
@@ -151,5 +189,15 @@ msgstr "Сброс пароля неуспешен"
 msgid "Email with password reset instructions has been sent."
 msgstr "Вам было отправлено письмо с инструкциями по сбросу пароля."
 
+#, python-format
 msgid "Reset password at %(site_name)s"
 msgstr "Сброс пароля на %(site_name)s"
+
+msgid "Choose Patient"
+msgstr "Выберите пациента"
+
+msgid "Choose Form"
+msgstr "Выберите форму"
+
+msgid "Patient already exists"
+msgstr "Пациент уже существует"

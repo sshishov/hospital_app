@@ -2,12 +2,12 @@
 
 {% block content_auth %}
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Authentification</div>
+      <div class="card-header">{% trans 'Authentication' %}</div>
       <div class="card-body">
         <form method="POST" action=".">
           {% csrf_token %}
-          {% bootstrap_form form %}
-          <input type="submit" value="{% trans 'Log in' %}" />
+          {% bootstrap_form form layout='inline' %}
+          <button type="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
           <input type="hidden" name="next" value="{{ next }}" />
         </form>
         <div class="text-center">
