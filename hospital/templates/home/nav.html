@@ -57,9 +57,9 @@
           {{ user.get_username }}
         </a>
         <div class="dropdown-menu" aria-labelledby="userMenuDropdown">
-          <a class="dropdown-item" href="{% url 'profile' %}">User Profile</a>
+          <a class="dropdown-item" href="{% url 'profile' %}">{% trans 'Profile' %}</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/admin">Adminpanel</a>
+          <a class="dropdown-item" href="{% url 'admin:index' %}">{% trans 'Adminpanel' %}</a>
         </div>
       </li>
       <li class="nav-item">

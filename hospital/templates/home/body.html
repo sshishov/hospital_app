@@ -12,11 +12,24 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'hospital/css/base.css' %}" type="text/css" />
     <link href="{% static 'hospital/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+
+    <!-- Page level plugin CSS-->
+    <link href="{% static 'hospital/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block js_content %}
+  <!-- jquery and bootstrap JavaScript-->
   <script src="{% static 'hospital/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'hospital/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script src="{% static 'hospital/vendor/datatables/jquery.dataTables.js' %}"></script>
+  <script src="{% static 'hospital/vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+
+  <script src="{% static 'hospital/js/base.js' %}"></script>
+
+  <!-- bootstrap-select plugin JavaScript-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 {% endblock %}

@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render
@@ -25,8 +27,9 @@ class PatientForm(forms.ModelForm):
         fields = ('full_name', 'birthday',)
         widgets = {
             'birthday': forms.SelectDateWidget(
+                years=range(1920, date.today().year + 1),
                 attrs={
-                    'class': 'form-control snps-inline-select'
+                    'class': 'form-control'
                 }
             ),
         }

@@ -138,9 +138,6 @@ msgstr "История и Форма"
 msgid "Logout"
 msgstr "Выход"
 
-msgid "User profile"
-msgstr "Пользовательский Профиль"
-
 msgid "Username"
 msgstr "Имя пользователя"
 

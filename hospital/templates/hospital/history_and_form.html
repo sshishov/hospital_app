@@ -29,11 +29,35 @@
   <div class="tab-content" id="historyAndFormTabContent">
     <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
       {% if request.session.patient %}
-        {% for history in history_list %}
-          {{ history.created_at }}: {{ history.name }}
-        {% endfor %}
+      <div class="table-responsive" style="margin: 20px 0;">
+        <table class="table table-bordered" id="patientHistoryTable" data-order='[[ 1, "desc" ]]' width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>{% trans 'Added' %}</th>
+              <th>Active</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for history in history_list %}
+            <tr>
+              <td>
+                {% for value in history.values %}
+                <b>{{ value.parameter }}</b>: {{ value.value }}
+                {% endfor %}
+              </td>
+              <td>{{ history.created_at|correctDateFormat }}</td>
+              <td>active</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
      {% else %}
-        <p>{% trans "Select patient to see the history" %}</p>
+      <div style="margin: 20px 0;">
+        {% trans "Select patient to see the history" as select_patient %}
+        {% bootstrap_alert select_patient alert_type='info' %}
+      </div>
       {% endif %}
     </div>
     <div class="tab-pane fade" id="new_form" role="tabpanel" aria-labelledby="new-form-tab">
@@ -43,7 +67,10 @@
           <button type="submit" class="btn btn-primary">{% trans 'Add' %}</button>
         </form>
       {% else %}
-        <p>{% trans "Select patient and form to create new application" %}</p>
+       <div style="margin: 20px 0;">
+         {% trans "Select patient and form to create new application" as select_patient_and_form %}
+         {% bootstrap_alert select_patient_and_form alert_type='info' %}
+       </div>
       {% endif %}
     </div>
   </div>
