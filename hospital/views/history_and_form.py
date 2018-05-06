@@ -6,15 +6,16 @@ from hospital import models as hospital_models
 
 
 class PatientSelect(forms.Select):
-    def __init__(self, attrs=None):
-        super(PatientSelect, self).__init__(attrs)
-        self.patients = {patient._id: patient.birthday for patient in
-                         hospital_models.Patient.objects.all()}
 
-    def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
-        option = super(PatientSelect, self).create_option(name, value, label, selected, index, subindex=None, attrs=None)
-        date_string = self.patients[value].strftime('%d.%m.%Y')
-        option['attrs']['data-subtext'] = date_string
+    objects = None
+
+    def get_context(self, *args, **kwargs):
+        self.objects = {obj.id: obj for obj in self.choices.queryset}
+        return super(PatientSelect, self).get_context(*args, **kwargs)
+
+    def create_option(self, *args, **kwargs):
+        option = super(PatientSelect, self).create_option(*args, **kwargs)
+        option['attrs']['data-subtext'] = self.objects[args[1]].birthday.strftime('%d.%m.%Y')
         return option
 
 
@@ -34,7 +35,7 @@ class SelectForm(forms.Form):
         empty_label=None,
     )
     form = forms.ModelChoiceField(
-        queryset=hospital_models.Form.objects.all(),
+        queryset=hospital_models.Form.objects.none(),
         widget=forms.Select(
             attrs={
                 'class': 'selectpicker',
@@ -52,12 +53,35 @@ class SelectForm(forms.Form):
             'patients': forms.Select(attrs={'class': 'selectpicker'})
         }
 
+    def __init__(self, data, *args, **kwargs):
+        super(SelectForm, self).__init__(data, *args, **kwargs)
+        project = data.get('project')
+        if project:
+            self.fields['form'].queryset = hospital_models.Form.objects.filter(project=project)
 
-def make_form_fields(form, patient):
-    fields = {'patient': forms.UUIDField(widget=forms.HiddenInput())}
-    for field in form.fields.all():
-        fields[field.name] = field.get_type()
-    return type('FormFields', (forms.BaseForm,), {'base_fields': fields})
+
+
+def make_form_fields(request, form):
+
+    class FormFields(forms.Form):
+
+        def __init__(self, *args, **kwargs):
+            super(FormFields, self).__init__(*args, **kwargs)
+            for field in form.fields.all():
+                self.fields[field.name] = field.get_type()
+
+        def save(self):
+            hospital_models.Application.objects.create(
+                doctor=request.user,
+                patient_id=request.session['patient'],
+                project_id=request.session['project'],
+                values=[],
+            )
+    # fields = {'patient': forms.UUIDField(widget=forms.HiddenInput())}
+    # for field in form.fields.all():
+    #     fields[field.name] = field.get_type()
+    # return type('FormFields', (forms.BaseForm,), {'base_fields': fields})
+    return FormFields
 
 
 def manage_view(request):
@@ -68,10 +92,14 @@ def manage_view(request):
         patient = patient_form.cleaned_data['patient']
         form = patient_form.cleaned_data['form']
         if form:
-            form_to_fill = make_form_fields(form, patient)(initial={'patient': patient.id})
+            form_to_fill = make_form_fields(request, form)()
         history_list = hospital_models.Application.objects.filter(
             patient=patient, project=request.session.get('project'),
         )
+    if request.method == 'POST':
+        form = make_form_fields(request, form)(data=request.POST)
+        if form.is_valid():
+            form.save()
     return render(
         request=request,
         template_name='hospital/history_and_form.html',

@@ -86,6 +86,7 @@ class Form(AbstractTimestampModel):
     name = models.CharField(max_length=30, verbose_name=_('Name'))
     # fields = models.ArrayReferenceField(to='hospital.Parameter', null=True, blank=True, verbose_name=_('Fields'))
     fields = models.ManyToManyField(to='hospital.Parameter', verbose_name=_('Fields'))
+    project = models.ForeignKey(to='hospital.Project', on_delete=models.CASCADE, verbose_name=_('Project'))
 
     class Meta:
         verbose_name = _('Form')
