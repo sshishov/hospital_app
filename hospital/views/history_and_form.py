@@ -48,11 +48,6 @@ class SelectForm(forms.Form):
         required=False
     )
 
-    class Meta:
-        widgets = {
-            'patients': forms.Select(attrs={'class': 'selectpicker'})
-        }
-
     def __init__(self, data, *args, **kwargs):
         super(SelectForm, self).__init__(data, *args, **kwargs)
         project = data.get('project')
@@ -68,18 +63,20 @@ def make_form_fields(request, form):
         def __init__(self, *args, **kwargs):
             super(FormFields, self).__init__(*args, **kwargs)
             for field in form.fields.all():
-                self.fields[field.name] = field.get_type()
+                self.fields[str(field.id)] = field.type()
+                self.fields[str(field.id)].widget.attrs['placeholder'] = field.name
 
         def save(self):
             hospital_models.Application.objects.create(
                 doctor=request.user,
                 patient_id=request.session['patient'],
                 project_id=request.session['project'],
+                form_code=form.code,
                 values=[
                     hospital_models.ParameterValue(
-                        parameter=hospital_models.Parameter.objects.get(name=name),
+                        parameter=hospital_models.Parameter.objects.get(pk=pk),
                         value=value,
-                    ) for name, value in self.cleaned_data.items()
+                    ) for pk, value in self.cleaned_data.items()
                 ],
             )
     # fields = {'patient': forms.UUIDField(widget=forms.HiddenInput())}

@@ -3,11 +3,12 @@ import uuid
 
 from django.utils.translation import ugettext_lazy as _
 
-from mongoengine import fields, document
 from djongo import models
 from django import forms
 
 logger = logging.getLogger(__name__)
+
+CODE_MAX_LENGTH = 10
 
 
 class AbstractTimestampModel(models.Model):
@@ -44,20 +45,21 @@ class Parameter(AbstractTimestampModel):
         (PARAMETER_TYPE_STRING, _('String')),
     )
     PARAMETER_TYPE_MAP = {
-        PARAMETER_TYPE_INTEGER: forms.IntegerField(),
-        PARAMETER_TYPE_STRING: forms.CharField(),
+        PARAMETER_TYPE_INTEGER: forms.IntegerField,
+        PARAMETER_TYPE_STRING: forms.CharField,
     }
 
     name = models.CharField(max_length=30, verbose_name=_('Name'))
     description = models.TextField(verbose_name=_('Description'))
-    type = models.IntegerField(choices=PARAMETER_TYPES, verbose_name=_('Type'))
+    field_type = models.IntegerField(choices=PARAMETER_TYPES, verbose_name=_('Type'))
 
     class Meta:
         verbose_name = _('Parameter')
         verbose_name_plural = _('Parameters')
 
-    def get_type(self):
-        return self.PARAMETER_TYPE_MAP[self.type]
+    @property
+    def type(self):
+        return self.PARAMETER_TYPE_MAP[self.field_type]
 
     def __str__(self):
         return self.name
@@ -73,6 +75,7 @@ class ParameterValue(AbstractTimestampModel):
 
 class Project(AbstractTimestampModel):
     name = models.CharField(max_length=30, verbose_name=_('Name'))
+    code = models.CharField(max_length=CODE_MAX_LENGTH, verbose_name=_('Code'))
 
     class Meta:
         verbose_name = _('Project')
@@ -87,6 +90,7 @@ class Form(AbstractTimestampModel):
     # fields = models.ArrayReferenceField(to='hospital.Parameter', null=True, blank=True, verbose_name=_('Fields'))
     fields = models.ManyToManyField(to='hospital.Parameter', verbose_name=_('Fields'))
     project = models.ForeignKey(to='hospital.Project', on_delete=models.CASCADE, verbose_name=_('Project'))
+    code = models.CharField(max_length=CODE_MAX_LENGTH, verbose_name=_('Code'))
 
     class Meta:
         verbose_name = _('Form')
@@ -105,16 +109,21 @@ class Application(AbstractTimestampModel):
     patient = models.ForeignKey('hospital.Patient', on_delete=models.CASCADE, verbose_name=_('Patient'))
     project = models.ForeignKey('hospital.Project', on_delete=models.CASCADE, verbose_name=_('Project'))
     values = models.ArrayModelField(model_container=ParameterValue, verbose_name=_('Values'))
+    form_code = models.CharField(max_length=CODE_MAX_LENGTH, verbose_name=_('Form code'))
+    is_active = models.BooleanField(default=True)
+    parent = models.ForeignKey('hospital.Application', on_delete=models.CASCADE, verbose_name=_('Parent'))
 
     class Meta:
         verbose_name = _('Application')
         verbose_name_plural = _('Applications')
 
+    def __str__(self):
+        return '{obj.project.code}:{obj.form_code}:{obj.values}'.format(obj=self)
+
 
 # user extension models
 class UserProfile(AbstractTimestampModel):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=100, verbose_name=_('Full Name'))
     city = models.CharField(max_length=100, verbose_name=_('City'))
     subject = models.CharField(max_length=100, verbose_name=_('Subject'))
     district = models.CharField(max_length=100, verbose_name=_('District'))
@@ -125,4 +134,4 @@ class UserProfile(AbstractTimestampModel):
         verbose_name_plural = _('Profiles')
 
     def __str__(self):
-        return self.full_name
+        return self.user.get_full_name()
