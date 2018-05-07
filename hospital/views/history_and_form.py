@@ -75,7 +75,12 @@ def make_form_fields(request, form):
                 doctor=request.user,
                 patient_id=request.session['patient'],
                 project_id=request.session['project'],
-                values=[],
+                values=[
+                    hospital_models.ParameterValue(
+                        parameter=hospital_models.Parameter.objects.get(name=name),
+                        value=value,
+                    ) for name, value in self.cleaned_data.items()
+                ],
             )
     # fields = {'patient': forms.UUIDField(widget=forms.HiddenInput())}
     # for field in form.fields.all():
