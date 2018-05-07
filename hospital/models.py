@@ -72,6 +72,9 @@ class ParameterValue(AbstractTimestampModel):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return '{obj.parameter.name}={obj.value}'.format(obj=self)
+
 
 class Project(AbstractTimestampModel):
     name = models.CharField(max_length=30, verbose_name=_('Name'))

@@ -22,6 +22,16 @@ def manage_patients(request):
 
 class PatientForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super(PatientForm, self).__init__(*args, **kwargs)
+        field = self.fields.get('full_name')
+        if field:
+            field.widget.attrs.update(
+                {'placeholder': field.label}
+            )
+            field.label = ''
+
+
     class Meta:
         model = hospital_models.Patient
         fields = ('full_name', 'birthday',)

@@ -30,12 +30,12 @@
     <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
       {% if request.session.patient %}
       <div class="table-responsive" style="margin: 20px 0;">
-        <table class="table table-bordered" id="patientHistoryTable" data-order='[[ 1, "desc" ]]' width="100%" cellspacing="0">
+        <table class="table cell-border order-column" id="patientHistoryTable" data-order='[[ 1, "desc" ]]' width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>Data</th>
+              <th>{% trans 'Applications' %}</th>
               <th>{% trans 'Added' %}</th>
-              <th>Active</th>
+              <th>{% trans 'Active' %}</th>
             </tr>
           </thead>
           <tbody>
@@ -43,11 +43,11 @@
             <tr>
               <td>
                 {% for value in history.values %}
-                <b>{{ value.parameter }}</b>: {{ value.value }}
+                <b>{{ value.parameter }}</b>: {{ value.value }}<br/>
                 {% endfor %}
               </td>
               <td>{{ history.created_at|correctDateFormat }}</td>
-              <td>active</td>
+              <td>{{ history.is_active }}</td>
             </tr>
           {% endfor %}
           </tbody>

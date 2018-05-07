@@ -2,7 +2,7 @@
 
 {% block content %}
   <p><b>{% trans 'Username' %}</b>: {{request.user.username}}</p>
-  <p><b>{% trans 'Full Name' %}</b>: {{request.user.userprofile.full_name}}</p>
+  <p><b>{% trans 'Full Name' %}</b>: {{ request.user.userprofile }}</p>
   <p><b>{% trans 'City' %}</b>: {{request.user.userprofile.city}}</p>
   <p><b>{% trans 'Subject' %}</b>: {{request.user.userprofile.subject}}</p>
   <p><b>{% trans 'District' %}</b>: {{request.user.userprofile.district}}</p>
