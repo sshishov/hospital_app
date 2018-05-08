@@ -110,10 +110,9 @@ class Form(AbstractTimestampModel):
 class Application(AbstractTimestampModel):
     doctor = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name=_('Doctor'))
     patient = models.ForeignKey('hospital.Patient', on_delete=models.CASCADE, verbose_name=_('Patient'))
-    project = models.ForeignKey('hospital.Project', on_delete=models.CASCADE, verbose_name=_('Project'))
+    form = models.ForeignKey('hospital.Form', on_delete=models.CASCADE, verbose_name=_('Form'))
     values = models.ArrayModelField(model_container=ParameterValue, verbose_name=_('Values'))
-    form_code = models.CharField(max_length=CODE_MAX_LENGTH, verbose_name=_('Form code'))
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True, verbose_name=_('Active'))
     parent = models.ForeignKey('hospital.Application', on_delete=models.CASCADE, verbose_name=_('Parent'))
 
     class Meta:
@@ -121,12 +120,12 @@ class Application(AbstractTimestampModel):
         verbose_name_plural = _('Applications')
 
     def __str__(self):
-        return '{obj.project.code}:{obj.form_code}:{obj.values}'.format(obj=self)
+        return '{obj.form.project.code}:{obj.form.code}:{obj.values}'.format(obj=self)
 
 
 # user extension models
 class UserProfile(AbstractTimestampModel):
-    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, verbose_name=_('User'))
     city = models.CharField(max_length=100, verbose_name=_('City'))
     subject = models.CharField(max_length=100, verbose_name=_('Subject'))
     district = models.CharField(max_length=100, verbose_name=_('District'))

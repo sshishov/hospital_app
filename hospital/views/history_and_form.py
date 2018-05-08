@@ -70,8 +70,7 @@ def make_form_fields(request, form):
             hospital_models.Application.objects.create(
                 doctor=request.user,
                 patient_id=request.session['patient'],
-                project_id=request.session['project'],
-                form_code=form.code,
+                form=form,
                 values=[
                     hospital_models.ParameterValue(
                         parameter=hospital_models.Parameter.objects.get(pk=pk),
@@ -96,7 +95,7 @@ def manage_view(request):
         if form:
             form_to_fill = make_form_fields(request, form)()
         history_list = hospital_models.Application.objects.filter(
-            patient=patient, project=request.session.get('project'),
+            patient=patient, form__project=request.session.get('project'),
         )
     if request.method == 'POST':
         form = make_form_fields(request, form)(data=request.POST)
