@@ -94,6 +94,8 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
 
     'stronghold.middleware.LoginRequiredMiddleware',
+
+    'hospital.middleware.ProjectMiddleware',
 ]
 
 ROOT_URLCONF = 'hospital.urls'

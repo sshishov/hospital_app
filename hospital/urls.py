@@ -20,7 +20,7 @@ urlpatterns = [
     path(route='history_and_form/', view=hospital_views.history_and_form.manage_view, name='history_and_form'),
 
     # session settings
-    path(route='accounts/', view=hospital_views.session_settings.update_session_data, name='update_data'),
+    path(route='accounts/session/', view=hospital_views.session_settings.update_session_data, name='update_data'),
 
     # parameters views
     path(route='parameters_set/', view=hospital_views.parameters.manage_parameters, name='parameter-set'),

@@ -12,7 +12,7 @@ CODE_MAX_LENGTH = 10
 
 
 class AbstractTimestampModel(models.Model):
-    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name=_('ID'))
+    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name=_('ID'), editable=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Added'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Updated'))
 

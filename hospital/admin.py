@@ -6,17 +6,15 @@ from . import models
 
 
 class PatientAdmin(admin.ModelAdmin):
-    exclude = ('_id',)
+    pass
 
 
 class ParameterAdmin(admin.ModelAdmin):
-    exclude = ('_id',)
     list_display = ('name', 'description', 'created_at','updated_at')
     ordering = ('name',)
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    exclude = ('_id',)
     list_display = ('name', 'created_at', 'updated_at')
 
 
@@ -25,12 +23,10 @@ class ApplicationAdmin(admin.ModelAdmin):
 
 
 class FormAdmin(admin.ModelAdmin):
-    exclude = ('_id',)
     list_display = ('name', 'form_fields', 'created_at', 'updated_at')
 
 
 class UserProfileInline(admin.StackedInline):
-    exclude = ('_id',)
     model = models.UserProfile
     can_delete = False
 
