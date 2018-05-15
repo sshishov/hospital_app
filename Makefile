@@ -52,3 +52,8 @@ test: clean
 
 translate:
 	python manage.py makemessages --no-location --no-obsolete --no-wrap --locale ru
+
+release:
+	$(MAKE) docker-git
+	$(MAKE) docker-push
+	eb deploy

@@ -1,0 +1,84 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "mongo-data",
+      "host": {
+        "sourcePath": "/var/app/currents/docker/compose/data/mongo/db"
+      }
+    },
+    {
+      "name": "mongo-conf",
+      "host": {
+        "sourcePath": "/var/app/current/docker/compose/conf/mongo/docker-entrypoint-initdb.d"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "hospital_app",
+      "image": "sshishov/hospital_app:latest",
+      "essential": true,
+      "memory": 512,
+      "links": [
+        "mongodb"
+      ],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8000
+        }
+      ],
+      "environment": [
+        {
+          "name": "H_DJANGO_ALLOWED_HOSTS",
+          "value": ".elasticbeanstalk.com"
+        },
+        {
+          "name": "H_DB_DEFAULT",
+          "value": "djongo://hospital:hospital@mongodb/hospital"
+        }
+      ]
+    },
+    {
+      "name": "mongodb",
+      "image": "mongo:latest",
+      "memory": 256,
+      "environment": [
+        {
+          "name": "MONGO_INITDB_ROOT_USERNAME",
+          "value": "admin"
+        },
+        {
+          "name": "MONGO_INITDB_ROOT_PASSWORD",
+          "value": "admin"
+        },
+        {
+          "name": "MONGO_INITDB_DATABASE",
+          "value": "hospital"
+        },
+        {
+          "name": "MONGO_DATA_DIR",
+          "value": "/data/mongo/db"
+        }
+      ],
+      "portMappings": [
+        {
+          "hostPort": 27017,
+          "containerPort": 27017
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "mongo-data",
+          "containerPath": "/data/db"
+        },
+        {
+          "sourceVolume": "mongo-conf",
+          "containerPath": "/docker-entrypoint-initdb.d",
+          "readOnly": true
+        }
+      ]
+    }
+  ]
+}
