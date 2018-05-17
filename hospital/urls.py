@@ -13,7 +13,7 @@ urlpatterns = [
     path(route='accounts/profile/', view=hospital_views.profile.get_profile, name='profile'),
 
     # common
-    path(route=settings.ADMIN_URL, view=admin.site.urls),
+    path(route='{url}/'.format(url=settings.ADMIN_URL), view=admin.site.urls),
     path(route='', view=generic_views.RedirectView.as_view(pattern_name='history_and_form'), name='index'),
     path(route='i18n/', view=include('django.conf.urls.i18n')),
     path(route='history_and_form/', view=hospital_views.history_and_form.manage_view, name='history_and_form'),
