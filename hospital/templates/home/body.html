@@ -11,12 +11,13 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'hospital/css/base.css' %}" type="text/css" />
-    <link href="{% static 'hospital/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'hospital/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css" />
 
     <!-- Page level plugin CSS-->
-    <link href="{% static 'hospital/vendor/datatables/dataTables.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'hospital/vendor/datatables/dataTables.css' %}" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block js_content %}
@@ -27,6 +28,7 @@
   <!-- Page level plugin JavaScript-->
   <script src="{% static 'hospital/vendor/datatables/jquery.dataTables.js' %}"></script>
   <script src="{% static 'hospital/vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+ <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 
   <script src="{% static 'hospital/js/base.js' %}"></script>
 

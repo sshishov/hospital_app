@@ -43,7 +43,10 @@
             <tr>
               <td>
                 {% for value in history.values %}
-                <b>{{ value.parameter }}</b>: {{ value.value }}<br/>
+                {% autoescape off %}
+                <b>{{ value.parameter }}</b>: {{ value.get_wrapped_value }}
+                {% if forloop.last %}{% else %}<br/>{% endif %}
+                {% endautoescape %}
                 {% endfor %}
               </td>
               <td>{{ history.created_at|correctDateFormat }}</td>
@@ -56,20 +59,20 @@
      {% else %}
       <div style="margin: 20px 0;">
         {% trans "Select patient to see the history" as select_patient %}
-        {% bootstrap_alert select_patient alert_type='info' %}
+        {% bootstrap_alert select_patient alert_type='info' dismissable=False %}
       </div>
       {% endif %}
     </div>
     <div class="tab-pane fade" id="new_form" role="tabpanel" aria-labelledby="new-form-tab">
       {% if form_to_fill %}
-        <form method="POST" style="margin-top: 20px;">
+        <form method="POST" style="margin-top: 20px; margin-bottom: 20px;">
           {% bootstrap_form form_to_fill layout='inline' %}
           <button type="submit" class="btn btn-primary">{% trans 'Add' %}</button>
         </form>
       {% else %}
        <div style="margin: 20px 0;">
          {% trans "Select patient and form to create new application" as select_patient_and_form %}
-         {% bootstrap_alert select_patient_and_form alert_type='info' %}
+         {% bootstrap_alert select_patient_and_form alert_type='info' dismissable=False %}
        </div>
       {% endif %}
     </div>

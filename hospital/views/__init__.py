@@ -6,5 +6,5 @@ from . import profile, applications, forms, home, parameters, patients, projects
 @register.filter(name='correctDateFormat')
 def correctDateFormat(value):
     # arg is optional and not needed but you could supply your own formatting if you want.
-    dateformatted = value.strftime("%d.%m.%Y %H:%M:%S")
-    return dateformatted
+    formattedDate = value.strftime("%d.%m.%Y %H:%M:%S")
+    return formattedDate

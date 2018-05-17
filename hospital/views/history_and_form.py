@@ -64,7 +64,38 @@ def make_form_fields(request, form):
             super(FormFields, self).__init__(*args, **kwargs)
             for field in form.fields.all():
                 self.fields[str(field.id)] = field.type()
-                self.fields[str(field.id)].widget.attrs['placeholder'] = field.name
+                if field.field_type == field.PARAMETER_TYPE_MULTISTRING:
+                    self.fields[str(field.id)].widget=forms.Textarea()
+                if field.field_type == field.PARAMETER_TYPE_DATE:
+                    self.fields[str(field.id)].widget.attrs.update({
+                        'data-provide': 'datepicker',
+                    })
+                if field.field_type == field.PARAMETER_TYPE_DATETIME:
+                    self.fields[str(field.id)].widget.attrs.update({
+                        'data-provide': 'datetimepicker',
+                    })
+
+                self.fields[str(field.id)].widget.attrs.update({
+                    'placeholder': field.name,
+                    'data-content': field.description,
+                    'data-toggle': 'popover',
+                    'class': 'col-8',
+                })
+
+                if field.field_type == field.PARAMETER_TYPE_BOOLEAN:
+                    self.fields[str(field.id)] = field.type(
+                        coerce=lambda x: x,
+                        choices=(
+                            (field.name, (
+                                (_('Yes'), _('Yes')),
+                                (_('No'), _('No'))
+                            )),
+                        ),
+                        widget=forms.RadioSelect
+                    )
+                    self.fields[str(field.id)].widget.attrs.update({
+                        'class': 'radio-inline',
+                    })
 
         def save(self):
             hospital_models.Application.objects.create(
