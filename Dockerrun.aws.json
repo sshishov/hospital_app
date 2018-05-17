@@ -6,12 +6,6 @@
       "host": {
         "sourcePath": "/var/app/currents/docker/compose/data/mongo/db"
       }
-    },
-    {
-      "name": "mongo-conf",
-      "host": {
-        "sourcePath": "/var/app/current/docker/compose/conf/mongo/docker-entrypoint-initdb.d"
-      }
     }
   ],
   "containerDefinitions": [
@@ -44,11 +38,6 @@
         {
           "sourceVolume": "mongo-data",
           "containerPath": "/data/db"
-        },
-        {
-          "sourceVolume": "mongo-conf",
-          "containerPath": "/docker-entrypoint-initdb.d",
-          "readOnly": true
         }
       ]
     }
