@@ -1,0 +1,77 @@
+{% extends 'home/body.html' %}
+
+{% block content %}
+  <form class="inline-form pull-left" action="{% url 'update_data' %}" method="POST">
+    <div class="input-group mb-2 mr-sm-2">
+      <div class="input-group-text">
+        <i class="fa fa-fw fa-address-card"></i>
+      </div>
+      {{ patient_form.patient }}
+    </div>
+  </form>
+  <form class="inline-form pull-left" action="{% url 'update_data' %}" method="POST">
+    <div class="input-group mb-2 mr-sm-2">
+      <div class="input-group-text">
+        <i class="fa fa-fw fa-wpforms"></i>
+      </div>
+      {{ patient_form.form }}
+    </div>
+  </form>
+  <div style="clear:both;"></div>
+  <ul class="nav nav-tabs" id="history_and_new_form_id">
+    <li class="nav-item">
+      <a class="nav-link active show" id="history_id" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">{% trans "History" %}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="new_form_id" data-toggle="tab" href="#new_form" role="tab" aria-controls="new-form" aria-selected="true">{% trans "New Application" %}</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="historyAndFormTabContent">
+    <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
+      {% if request.session.patient %}
+      <div class="table-responsive" style="margin: 20px 0;">
+        <table class="table cell-border order-column" id="patientHistoryTable" data-order='[[ 1, "desc" ]]' width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>{% trans 'Applications' %}</th>
+              <th>{% trans 'Added' %}</th>
+              <th>{% trans 'Active' %}</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for history in history_list %}
+            <tr>
+              <td>
+                {% for value in history.values %}
+                <b>{{ value.parameter }}</b>: {{ value.value }}<br/>
+                {% endfor %}
+              </td>
+              <td>{{ history.created_at|correctDateFormat }}</td>
+              <td>{{ history.is_active }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+     {% else %}
+      <div style="margin: 20px 0;">
+        {% trans "Select patient to see the history" as select_patient %}
+        {% bootstrap_alert select_patient alert_type='info' %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="tab-pane fade" id="new_form" role="tabpanel" aria-labelledby="new-form-tab">
+      {% if form_to_fill %}
+        <form method="POST" style="margin-top: 20px;">
+          {% bootstrap_form form_to_fill layout='inline' %}
+          <button type="submit" class="btn btn-primary">{% trans 'Add' %}</button>
+        </form>
+      {% else %}
+       <div style="margin: 20px 0;">
+         {% trans "Select patient and form to create new application" as select_patient_and_form %}
+         {% bootstrap_alert select_patient_and_form alert_type='info' %}
+       </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

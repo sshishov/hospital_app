@@ -103,3 +103,8 @@ xmlrunner/
 docker/github
 docker/archive.tar.gz
 staticfiles/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

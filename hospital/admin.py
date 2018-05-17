@@ -10,12 +10,12 @@ class PatientAdmin(admin.ModelAdmin):
 
 
 class ParameterAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description', 'created_at','updated_at']
-    ordering = ['name']
+    list_display = ('name', 'description', 'created_at','updated_at')
+    ordering = ('name',)
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['name', 'created_at', 'updated_at']
+    list_display = ('name', 'created_at', 'updated_at')
 
 
 class ApplicationAdmin(admin.ModelAdmin):
@@ -23,19 +23,18 @@ class ApplicationAdmin(admin.ModelAdmin):
 
 
 class FormAdmin(admin.ModelAdmin):
-    list_display = ['name', 'form_fields', 'created_at', 'updated_at']
+    list_display = ('name', 'form_fields', 'created_at', 'updated_at')
 
 
 class UserProfileInline(admin.StackedInline):
     model = models.UserProfile
     can_delete = False
-    verbose_name = 'Profile'
-    verbose_name_plural = 'Profiles'
 
 
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
     inlines = (UserProfileInline,)
+
 
 # Re-register UserAdmin
 admin.site.unregister(User)

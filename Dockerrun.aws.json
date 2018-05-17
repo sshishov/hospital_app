@@ -1,0 +1,45 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "mongo-data",
+      "host": {
+        "sourcePath": "/var/app/currents/docker/compose/data/mongo/db"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "hospital_app",
+      "image": "sshishov/hospital_app:latest",
+      "essential": true,
+      "memory": 512,
+      "links": [
+        "mongodb"
+      ],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8000
+        }
+      ]
+    },
+    {
+      "name": "mongodb",
+      "image": "mongo:latest",
+      "memory": 256,
+      "portMappings": [
+        {
+          "hostPort": 27017,
+          "containerPort": 27017
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "mongo-data",
+          "containerPath": "/data/db"
+        }
+      ]
+    }
+  ]
+}

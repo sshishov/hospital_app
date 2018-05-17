@@ -1,34 +1,17 @@
-{% load static %}
-{% load i18n %}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="icon" href="{% static "images/favicon.ico" %}" type="image/x-icon" />
-    <link rel="shortcut icon" href="{% static "images/favicon.ico" %}" type="image/x-icon" />
-    <link rel="stylesheet" href="{% static "hospital/css/base.css" %}" type="text/css" />
-    <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
-    <script src="{% static "hospital/js/base.js" %}"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>{% block title %}Title{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    {% block css %}{% endblock %}
+    {% bootstrap_css %}
   </head>
-  <body>
-    <header>
-      {% block header %}
-        {% trans "Header" %}
-      {% endblock %}
-    </header>
-    <div class="content">
-      {% include "home/user_interface.html" %}
-      {% include "home/language_switch.html" %}
-      {% block content %}
-        {%  trans "Content" %}
-      {% endblock %}
-    </div>
-    <footer>
-      {% block footer %}
-        {% trans "Footer" %}
-      {% endblock %}
-    </footer>
+  <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    {% block body %}{% endblock %}
+    {% block js_content %}{% endblock %}
   </body>
 </html>

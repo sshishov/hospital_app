@@ -1,13 +1,11 @@
-{% extends 'home/base.html' %}
-
-{% load i18n %}
+{% extends 'home/body.html' %}
 
 {% block content %}
     <h1>{{ view.model.model_name }}</h1>
     <ul>
         {% for object in object_list %}
         <li>
-            <a href="{% url "patient-update" object.id %}">{{ object.name }}</a>
+            <a href="{% url "patient-update" object.id %}">{{ object.full_name }}</a>
             <a href="{% url "patient-delete" object.id %}">{% trans "Delete" %}</a>
         </li>
         {% endfor %}

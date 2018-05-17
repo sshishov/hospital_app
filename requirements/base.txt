@@ -3,7 +3,8 @@ django==2.0.4
 django-log-request-id==1.3.2
 django-stronghold==0.3.0
 # Update djongo when release with native UUID support is released
-git+https://github.com/sshishov/djongo.git@cf21a0fb60f46add134194605ef04f1605b75d2f
+git+https://github.com/sshishov/djongo.git@702a96a1ce3fc128988c79a3abd744d97d561df8
 envparse==0.2.0
 mongoengine==0.15.0
 python-logstash==0.4.6
+django-bootstrap3==9.1.0
