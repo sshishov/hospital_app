@@ -102,6 +102,7 @@ ENV/
 xmlrunner/
 docker/github
 docker/archive.tar.gz
+docker/compose/data
 staticfiles/
 
 # Elastic Beanstalk Files
