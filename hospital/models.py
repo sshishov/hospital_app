@@ -7,6 +7,8 @@ from djongo import models
 from django import forms
 from django.conf import settings
 
+from . import form_fields
+
 logger = logging.getLogger(__name__)
 
 CODE_MAX_LENGTH = 10
@@ -40,7 +42,7 @@ class Patient(AbstractTimestampModel):
 class Parameter(AbstractTimestampModel):
 
     PARAMETER_TYPE_INTEGER = 1
-    PARAMETER_TYPE_FLOAT = 2
+    PARAMETER_TYPE_DECIMAL = 2
     PARAMETER_TYPE_STRING = 3
     PARAMETER_TYPE_MULTISTRING = 4
     PARAMETER_TYPE_BOOLEAN = 5
@@ -49,7 +51,7 @@ class Parameter(AbstractTimestampModel):
     PARAMETER_TYPES = (
         (PARAMETER_TYPE_INTEGER, _('Integer')),
         (PARAMETER_TYPE_STRING, _('String')),
-        (PARAMETER_TYPE_FLOAT, _('Float')),
+        (PARAMETER_TYPE_DECIMAL, _('Decimal')),
         (PARAMETER_TYPE_MULTISTRING, _('Multistring')),
         (PARAMETER_TYPE_BOOLEAN, _('Boolean')),
         (PARAMETER_TYPE_DATE, _('Date')),
@@ -57,12 +59,12 @@ class Parameter(AbstractTimestampModel):
     )
     PARAMETER_TYPE_MAP = {
         PARAMETER_TYPE_INTEGER: forms.IntegerField,
-        PARAMETER_TYPE_FLOAT: forms.FloatField,
+        PARAMETER_TYPE_DECIMAL: forms.DecimalField,
         PARAMETER_TYPE_STRING: forms.CharField,
-        PARAMETER_TYPE_MULTISTRING: forms.CharField,
-        PARAMETER_TYPE_BOOLEAN: forms.TypedChoiceField,
-        PARAMETER_TYPE_DATE: forms.DateField,
-        PARAMETER_TYPE_DATETIME: forms.DateTimeField,
+        PARAMETER_TYPE_MULTISTRING: form_fields.HospitalTextField,
+        PARAMETER_TYPE_BOOLEAN: form_fields.HospitalBooleanField,
+        PARAMETER_TYPE_DATE: form_fields.HospitalDateField,
+        PARAMETER_TYPE_DATETIME: form_fields.HospitalDateTimeField,
     }
 
     name = models.CharField(max_length=30, verbose_name=_('Name'))
@@ -147,9 +149,8 @@ class Application(AbstractTimestampModel):
 
 
 # user extension models
-class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True,
-                                on_delete=models.CASCADE, verbose_name=_('User'))
+class UserProfile(AbstractTimestampModel):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('User'))
     city = models.CharField(max_length=100, verbose_name=_('City'))
     subject = models.CharField(max_length=100, verbose_name=_('Subject'))
     district = models.CharField(max_length=100, verbose_name=_('District'))
