@@ -5,6 +5,8 @@ from django.utils.translation import pgettext_lazy
 from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django import forms
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import permission_required
 
 from .. import forms as hospital_forms, models as hospital_models
 
@@ -56,6 +58,8 @@ class PatientList(ListView):
     model = hospital_models.Patient
 
 
+@method_decorator(permission_required('auth.can_add_patients', raise_exception=True),
+                  name='dispatch')
 class PatientCreate(CreateView):
     model = hospital_models.Patient
     form_class = PatientForm

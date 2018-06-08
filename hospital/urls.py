@@ -64,8 +64,10 @@ urlpatterns = [
     #      name='application-update'),
     # path(route='applications/<uuid:pk>/delete/', view=hospital_views.applications.ApplicationDelete.as_view(),
     #      name='application-delete'),
+
 ]
 
+handler403 = 'hospital.views.errors.permission_denied'
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit

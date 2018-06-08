@@ -9,6 +9,7 @@
       {{ patient_form.patient }}
     </div>
   </form>
+  {% if perms.auth.can_add_apps %}
   <form class="inline-form pull-left" action="{% url 'update_data' %}" method="POST">
     <div class="input-group mb-2 mr-sm-2">
       <div class="input-group-text">
@@ -17,14 +18,17 @@
       {{ patient_form.form }}
     </div>
   </form>
+  {% endif %}
   <div style="clear:both;"></div>
   <ul class="nav nav-tabs" id="history_and_new_form_id">
     <li class="nav-item">
       <a class="nav-link active show" id="history_id" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">{% trans "History" %}</a>
     </li>
+    {% if perms.auth.can_add_apps %}
     <li class="nav-item">
       <a class="nav-link" id="new_form_id" data-toggle="tab" href="#new_form" role="tab" aria-controls="new-form" aria-selected="true">{% trans "New Application" %}</a>
     </li>
+    {% endif %}
   </ul>
   <div class="tab-content" id="historyAndFormTabContent">
     <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
@@ -32,15 +36,19 @@
       <div class="table-responsive" style="margin: 20px 0;">
         <table class="table cell-border order-column" id="patientHistoryTable" data-order='[[ 1, "desc" ]]' width="100%" cellspacing="0">
           <thead>
-            <tr>
-              <th>{% trans "Applications" context "model_name" %}</th>
-              <th>{% trans "Added" context "model_field" %}</th>
-              <th>{% trans "Active" context "model_field" %}</th>
+              {% if can_view_all_apps %}
+              <th class="patientHistoryCol_Doctor">{% trans 'Doctor' context "model_name" %}</th>
+              {% endif %}
+              <th>{% trans 'Applications' context "model_name" %}</th>
+              <th class="patientHistoryCol_Date">{% trans 'Added' context "model_field" %}</th>
             </tr>
           </thead>
           <tbody>
           {% for history in history_list %}
             <tr>
+              {% if can_view_all_apps %}
+              <td>{{ history.doctor.get_full_name }}</td>
+              {% endif %}
               <td>
                 {% for value in history.values %}
                 {% autoescape off %}
@@ -50,7 +58,6 @@
                 {% endfor %}
               </td>
               <td>{{ history.created_at | date:"d.m.Y H:i:s" }}</td>
-              <td>{{ history.is_active }}</td>
             </tr>
           {% endfor %}
           </tbody>
