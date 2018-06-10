@@ -91,13 +91,10 @@ def make_form_fields(request, form):
     return FormFields
 
 
-@permission_required('auth.can_manage_apps', raise_exception=True)
+@permission_required('hospital.manage_application', raise_exception=True)
 def manage_view(request):
     form_to_fill = None
     history_list = []
-
-    # append user permissions
-    can_view_all_apps = request.user.has_perm('auth.can_view_all_apps')
 
     # generate form and history list
     patient_form = SelectForm(request.session)
@@ -113,8 +110,8 @@ def manage_view(request):
             patient=patient, form__project=request.session.get('project'),
         )
 
-        # specific filters for history list
-        history_list = history_list if can_view_all_apps else history_list.filter(doctor=request.user.id)
+        if not request.user.has_perm('hospital.supervise_application'):
+            history_list = history_list.filter(doctor=request.user.id)
 
     # check and save application
     if request.method == 'POST':
@@ -130,6 +127,5 @@ def manage_view(request):
             'patient_form': patient_form,
             'history_list': history_list,
             'form_to_fill': form_to_fill,
-            'can_view_all_apps': can_view_all_apps,
         },
     )

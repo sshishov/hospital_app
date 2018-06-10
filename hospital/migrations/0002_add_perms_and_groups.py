@@ -3,50 +3,58 @@
 from __future__ import unicode_literals
 from django.db import migrations
 
+from django.core.management.sql import emit_post_migrate_signal
+
+
+PERMISSIONS_TO_CREATE = (
+    ('manage_application', 'Can manage applications', 'Application'),
+    ('supervise_application', 'Can supervise applications per project', 'Application'),
+)
+SUPERVISOR_PERMISSIONS = (PERMISSIONS_TO_CREATE[0][0], PERMISSIONS_TO_CREATE[1][0], 'add_application', 'add_patient')
+DOCTOR_PERMISSIONS = (PERMISSIONS_TO_CREATE[0][0], 'add_application', 'add_patient')
+
 
 def append_perms_and_groups(apps, schema_editor):
     # Get models that we needs them
-    users_model = apps.get_model("auth", "User")
-    permissions_model = apps.get_model("auth", "Permission")
-    groups_model = apps.get_model("auth", "Group")
-    content_type = apps.get_model("contenttypes", "ContentType")
+    Permission = apps.get_model('auth', 'Permission')
+    Group = apps.get_model('auth', 'Group')
+    ContentType = apps.get_model('contenttypes', 'ContentType')
 
-    # Get user content type object
-    uct = content_type.objects.get_for_model(users_model)
-    db_alias = schema_editor.connection.alias
+    # Run post-migrate manually to create default permissions
+    emit_post_migrate_signal(
+        verbosity=2,
+        interactive=False,
+        db='default',
+        db_alias=schema_editor.connection.alias,
+    )
 
     # Append custom permissions
-    can_add_patients_perm = permissions_model.objects.create(codename='can_add_patients',
-                          name='Can add patients',
-                          content_type=uct)
-    can_view_all_apps_perm = permissions_model.objects.create(codename='can_view_all_apps',
-                          name='Can view all applications per project',
-                          content_type=uct)
-    can_manage_apps_perm = permissions_model.objects.create(codename='can_manage_apps',
-                          name='Can manage applications',
-                          content_type=uct)
-    can_add_apps_perm = permissions_model.objects.create(codename='can_add_apps',
-                          name='Can add applications',
-                          content_type=uct)
-
-    # Get necessary permissions for group creation
-    # NOTE: !!! We can't get predefined permissions here.
-    # Predefined permissions are unavailable in db for this step
+    for codename, description, app in PERMISSIONS_TO_CREATE:
+        Permission.objects.get_or_create(
+            codename=codename,
+            name=description,
+            content_type=ContentType.objects.get_for_model(apps.get_model('hospital', app))
+        )
 
     # Groups Creation
-    supervisors_group = groups_model.objects.create(name='Supervisors')
-    doctors_group = groups_model.objects.create(name='Doctors')
+    supervisors_group = Group.objects.get_or_create(name='Supervisors')[0]
+    doctors_group = Group.objects.get_or_create(name='Doctors')[0]
 
     # Append specific permissions to created groups
-    # supervisors_group.permissions.add(can_view_all_apps_perm)
-    supervisors_group.permissions.set([can_view_all_apps_perm,
-                                       can_manage_apps_perm,
-                                       can_add_apps_perm,
-                                       can_add_patients_perm])
+    supervisors_group.permissions.add(*Permission.objects.filter(codename__in=SUPERVISOR_PERMISSIONS))
+    doctors_group.permissions.add(*Permission.objects.filter(codename__in=DOCTOR_PERMISSIONS))
 
-    doctors_group.permissions.set([can_manage_apps_perm,
-                                   can_add_apps_perm,
-                                   can_add_patients_perm])
+
+def remove_perms_and_groups(apps, schema_editor):
+    # Get models that we needs them
+    Permission = apps.get_model('auth', 'Permission')
+    Group = apps.get_model('auth', 'Group')
+
+    # Groups Deletion
+    Group.objects.filter(name__in=('Supervisors', 'Doctors')).delete()
+
+    # Delete permissions
+    Permission.objects.filter(codename__in=(item[0] for item in PERMISSIONS_TO_CREATE))
 
 
 class Migration(migrations.Migration):
@@ -57,6 +65,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunPython(
-            append_perms_and_groups,
+            append_perms_and_groups, remove_perms_and_groups,
         ),
     ]

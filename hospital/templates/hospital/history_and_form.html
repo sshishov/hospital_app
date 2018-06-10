@@ -9,7 +9,7 @@
       {{ patient_form.patient }}
     </div>
   </form>
-  {% if perms.auth.can_add_apps %}
+  {% if perms.hospital.add_application %}
   <form class="inline-form pull-left" action="{% url 'update_data' %}" method="POST">
     <div class="input-group mb-2 mr-sm-2">
       <div class="input-group-text">
@@ -24,7 +24,7 @@
     <li class="nav-item">
       <a class="nav-link active show" id="history_id" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">{% trans "History" %}</a>
     </li>
-    {% if perms.auth.can_add_apps %}
+    {% if perms.hospital.add_application %}
     <li class="nav-item">
       <a class="nav-link" id="new_form_id" data-toggle="tab" href="#new_form" role="tab" aria-controls="new-form" aria-selected="true">{% trans "New Application" %}</a>
     </li>
@@ -36,7 +36,7 @@
       <div class="table-responsive" style="margin: 20px 0;">
         <table class="table cell-border order-column" id="patientHistoryTable" data-order='[[ 1, "desc" ]]' width="100%" cellspacing="0">
           <thead>
-              {% if can_view_all_apps %}
+              {% if perms.hospital.supervise_application %}
               <th class="patientHistoryCol_Doctor">{% trans 'Doctor' context "model_name" %}</th>
               {% endif %}
               <th>{% trans 'Applications' context "model_name" %}</th>
@@ -46,7 +46,7 @@
           <tbody>
           {% for history in history_list %}
             <tr>
-              {% if can_view_all_apps %}
+              {% if perms.hospital.supervise_application %}
               <td>{{ history.doctor.get_full_name }}</td>
               {% endif %}
               <td>

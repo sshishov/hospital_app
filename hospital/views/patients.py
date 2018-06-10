@@ -58,8 +58,7 @@ class PatientList(ListView):
     model = hospital_models.Patient
 
 
-@method_decorator(permission_required('auth.can_add_patients', raise_exception=True),
-                  name='dispatch')
+@method_decorator(permission_required('hospital.add_patient', raise_exception=True), name='dispatch')
 class PatientCreate(CreateView):
     model = hospital_models.Patient
     form_class = PatientForm
