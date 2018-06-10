@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-17 00:34+0000\n"
+"POT-Creation-Date: 2018-06-10 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,320 +16,300 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 # ---------------------
 # language slection
 # ---------------------
-#: hospital/conf/base_settings.py:186
+msgctxt "language"
 msgid "Russian"
 msgstr "Русский"
 
-#: hospital/conf/base_settings.py:187
+msgctxt "language"
 msgid "English"
 msgstr "Английский"
 
-#: hospital/models.py:16
+msgctxt "model_field"
 msgid "ID"
 msgstr "№"
 
-#: hospital/models.py:17 hospital/templates/hospital/history_and_form.html:37
+msgctxt "model_field"
 msgid "Added"
 msgstr "Добавлено"
 
-#: hospital/models.py:18
+msgctxt "model_field"
 msgid "Updated"
 msgstr "Обновлено"
 
-#: hospital/models.py:29 hospital/templates/home/profile.html:5
+msgctxt "model_field"
 msgid "Full Name"
 msgstr "Фамилия Имя Отчество"
 
-#: hospital/models.py:30
+msgctxt "model_field"
 msgid "Birthday"
 msgstr "Дата рождения"
 
-#: hospital/models.py:33 hospital/models.py:135
+msgctxt "model_name"
 msgid "Patient"
 msgstr "Пациент"
 
-#: hospital/models.py:34 hospital/templates/home/index.html:9
-#: hospital/templates/home/index.html:10
+msgctxt "model_name"
 msgid "Patients"
 msgstr "Пациенты"
 
-#: hospital/models.py:50
+msgctxt "field_type"
 msgid "Integer"
 msgstr "Целое число"
 
-#: hospital/models.py:51
+msgctxt "field_type"
 msgid "String"
 msgstr "Строка"
 
-#: hospital/models.py:52
-msgid "Float"
-msgstr "Число с плавающей запятой"
+msgctxt "field_type"
+msgid "Decimal"
+msgstr "Дробный"
 
-#: hospital/models.py:53
+msgctxt "field_type"
 msgid "Multistring"
 msgstr "Многострочный текст"
 
-#: hospital/models.py:54
+msgctxt "field_type"
 msgid "Boolean"
 msgstr "Да/Нет"
 
-#: hospital/models.py:55
+msgctxt "field_type"
 msgid "Date"
 msgstr "Дата"
 
-#: hospital/models.py:56
+msgctxt "field_type"
 msgid "Datetime"
 msgstr "Дата и время"
 
-#: hospital/models.py:68 hospital/models.py:103 hospital/models.py:115
+msgctxt "model_field"
 msgid "Name"
 msgstr "Наименование"
 
-#: hospital/models.py:69
+msgctxt "model_field"
 msgid "Description"
 msgstr "Описание"
 
-#: hospital/models.py:70
+msgctxt "model_field"
 msgid "Type"
 msgstr "Тип"
 
-#: hospital/models.py:73 hospital/models.py:85
+msgctxt "model_field"
+msgid "Required"
+msgstr "Обязательное"
+
+msgctxt "model_name"
 msgid "Parameter"
 msgstr "Параметр"
 
-#: hospital/models.py:74 hospital/templates/home/index.html:6
-#: hospital/templates/home/index.html:7
+msgctxt "model_name"
 msgid "Parameters"
 msgstr "Параметры"
 
-#: hospital/models.py:86
+msgctxt "model_field"
+msgid "Parameter"
+msgstr "Параметр"
+
+msgctxt "model_field"
 msgid "Value"
 msgstr "Значение"
 
-#: hospital/models.py:104 hospital/models.py:119
+msgctxt "model_field"
 msgid "Code"
 msgstr "Код"
 
-#: hospital/models.py:107 hospital/models.py:118
+msgctxt "model_name"
 msgid "Project"
 msgstr "Проект"
 
-#: hospital/models.py:108 hospital/models.py:156
-#: hospital/templates/home/index.html:12 hospital/templates/home/index.html:13
+msgctxt "model_name"
 msgid "Projects"
 msgstr "Проекты"
 
-#: hospital/models.py:117
+msgctxt "model_field"
 msgid "Fields"
 msgstr "Поля"
 
-#: hospital/models.py:122 hospital/models.py:136
+msgctxt "model_field"
+msgid "Project"
+msgstr "Проект"
+
+msgctxt "model_name"
 msgid "Form"
 msgstr "Форма"
 
-#: hospital/models.py:123 hospital/templates/home/index.html:15
-#: hospital/templates/home/index.html:16
+msgctxt "model_name"
 msgid "Forms"
 msgstr "Формы"
 
-#: hospital/models.py:134
+msgctxt "model_field"
 msgid "Doctor"
 msgstr "Доктор"
 
-#: hospital/models.py:137
+msgctxt "model_field"
+msgid "Patient"
+msgstr "Пациент"
+
+msgctxt "model_field"
+msgid "Form"
+msgstr "Форма"
+
+msgctxt "model_field"
 msgid "Values"
 msgstr "Значения"
 
-#: hospital/models.py:138 hospital/templates/hospital/history_and_form.html:38
+msgctxt "model_field"
 msgid "Active"
-msgstr ""
+msgstr "Активный"
 
-#: hospital/models.py:139
+msgctxt "model_field"
 msgid "Parent"
 msgstr "Родитель"
 
-#: hospital/models.py:142
+msgctxt "model_name"
 msgid "Application"
 msgstr "Запись"
 
-#: hospital/models.py:143 hospital/templates/home/index.html:18
-#: hospital/templates/home/index.html:19
-#: hospital/templates/hospital/history_and_form.html:36
+msgctxt "model_name"
 msgid "Applications"
 msgstr "Записи"
 
-#: hospital/models.py:152
-#, fuzzy
-#| msgid "Username"
+msgctxt "model_field"
 msgid "User"
 msgstr "Имя пользователя"
 
-#: hospital/models.py:153 hospital/templates/home/profile.html:6
+msgctxt "model_field"
 msgid "City"
 msgstr "Город"
 
-#: hospital/models.py:154 hospital/templates/home/profile.html:7
+msgctxt "model_field"
 msgid "Subject"
 msgstr "Субъект РФ"
 
-#: hospital/models.py:155 hospital/templates/home/profile.html:8
+msgctxt "model_field"
 msgid "District"
 msgstr "Федеральный Округ"
 
-#: hospital/models.py:159 hospital/templates/home/nav.html:60
+msgctxt "model_field"
+msgid "Projects"
+msgstr "Проекты"
+
+msgctxt "model_name"
 msgid "Profile"
 msgstr "Профиль"
 
-#: hospital/models.py:160
+msgctxt "model_name"
 msgid "Profiles"
 msgstr "Профили"
 
-#: hospital/templates/home/body.html:7
 msgid "Content"
 msgstr "Содержание"
 
-#: hospital/templates/home/body_auth.html:6
 msgid "Authorization"
 msgstr "Авторизация"
 
-#: hospital/templates/home/index.html:4
 msgid "Main page"
 msgstr "Главная страница"
 
-#: hospital/templates/home/index.html:7 hospital/templates/home/index.html:10
-#: hospital/templates/home/index.html:13 hospital/templates/home/index.html:16
-#: hospital/templates/home/index.html:19
 msgid "(all-in-one)"
 msgstr "(все в одном)"
 
-#: hospital/templates/home/nav.html:2
 msgid "Hospital Application"
 msgstr "Приложение для больниц"
 
-#: hospital/templates/home/nav.html:12
+msgctxt "menu_item"
 msgid "Patient Creation"
 msgstr "Добавление пациента"
 
-#: hospital/templates/home/nav.html:18
+msgctxt "menu_item"
 msgid "History and Form"
 msgstr "История и Форма"
 
-#: hospital/templates/home/nav.html:62
-msgid "Adminpanel"
+msgctxt "menu_item"
+msgid "Profile"
+msgstr "Профиль"
+
+msgctxt "menu_item"
+msgid "AdminPanel"
 msgstr "Админ-панель"
 
-#: hospital/templates/home/nav.html:67
+msgctxt "action"
 msgid "Logout"
 msgstr "Выход"
 
-#: hospital/templates/home/profile.html:4
+msgctxt "model_field"
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: hospital/templates/home/profile.html:10
 msgid "Available Projects"
 msgstr "Доступные проекты"
 
-#: hospital/templates/hospital/base_formset.html:11
-#: hospital/templates/hospital/parameter_form.html:6
+msgctxt "action"
 msgid "Apply"
 msgstr "Применить"
 
-#: hospital/templates/hospital/form_form.html:6
-#: hospital/templates/hospital/form_list.html:14
-#: hospital/templates/hospital/history_and_form.html:70
-#: hospital/templates/hospital/parameter_list.html:14
-#: hospital/templates/hospital/patient_form.html:7
-#: hospital/templates/hospital/patient_list.html:14
-#: hospital/templates/hospital/project_form.html:6
-#: hospital/templates/hospital/project_list.html:14
+msgctxt "action"
 msgid "Add"
 msgstr "Добавить"
 
-#: hospital/templates/hospital/form_list.html:9
-#: hospital/templates/hospital/parameter_confirm_delete.html:6
-#: hospital/templates/hospital/parameter_list.html:9
-#: hospital/templates/hospital/patient_confirm_delete.html:6
-#: hospital/templates/hospital/patient_list.html:9
-#: hospital/templates/hospital/project_confirm_delete.html:6
-#: hospital/templates/hospital/project_list.html:9
+msgctxt "action"
 msgid "Delete"
 msgstr "Удалить"
 
-#: hospital/templates/hospital/history_and_form.html:23
 msgid "History"
 msgstr "История"
 
-#: hospital/templates/hospital/history_and_form.html:26
 msgid "New Application"
 msgstr "Новая запись"
 
-#: hospital/templates/hospital/history_and_form.html:61
+msgctxt "action"
 msgid "Select patient to see the history"
 msgstr "Выберите пациента, чтобы увидеть его историю"
 
-#: hospital/templates/hospital/history_and_form.html:74
 msgid "Select patient and form to create new application"
 msgstr "Выберите пациента и форму, чтобы создать новую запись"
 
-#: hospital/templates/registration/login.html:5
 msgid "Authentication"
 msgstr "Авторизация"
 
-#: hospital/templates/registration/login.html:10
-#: hospital/templates/registration/password_reset_complete.html:7
 msgid "Log in"
 msgstr "Войти"
 
-#: hospital/templates/registration/login.html:14
 msgid "Forgot password"
 msgstr "Забыли пароль"
 
-#: hospital/templates/registration/password_reset_complete.html:5
+msgctxt "success_msg"
 msgid "Password reset successfully"
 msgstr "Пароль успешно сброшен"
 
-#: hospital/templates/registration/password_reset_confirm.html:11
-#: hospital/templates/registration/password_reset_form.html:8
-msgid "Submit"
-msgstr "Применить"
+msgctxt "action"
+msgid "Log in"
+msgstr "Войти"
 
-#: hospital/templates/registration/password_reset_confirm.html:16
+msgctxt "error_msg"
 msgid "Password reset failed"
 msgstr "Сброс пароля неуспешен"
 
-#: hospital/templates/registration/password_reset_done.html:4
+msgctxt "success_msg"
 msgid "Email with password reset instructions has been sent."
 msgstr "Вам было отправлено письмо с инструкциями по сбросу пароля."
 
-#: hospital/templates/registration/password_reset_email.html:1
 #, python-format
+msgctxt "sucess_msg"
 msgid "Reset password at %(site_name)s"
 msgstr "Сброс пароля на %(site_name)s"
 
-#: hospital/views/history_and_form.py:31
+msgctxt "action"
 msgid "Choose Patient"
 msgstr "Выберите пациента"
 
-#: hospital/views/history_and_form.py:44
+msgctxt "action"
 msgid "Choose Form"
 msgstr "Выберите форму"
 
-#: hospital/views/history_and_form.py:90
-msgid "Yes"
-msgstr "Да"
-
-#: hospital/views/history_and_form.py:91
-msgid "No"
-msgstr "Нет"
-
-#: hospital/views/patients.py:52
+msgctxt "error_msg"
 msgid "Patient already exists"
 msgstr "Пациент уже существует"

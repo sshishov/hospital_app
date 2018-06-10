@@ -539,7 +539,12 @@ footer.sticky-footer {
 
 .checkbox label:active input:checked + i::after { transform: translate3d(16px, 2px, 0); }
 
-.checkbox label input { display: none; }
+.checkbox label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 26px;
+}
 
 .checkbox label input:checked + i { background-color: #4BD763; }
 

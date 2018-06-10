@@ -33,9 +33,9 @@
         <table class="table cell-border order-column" id="patientHistoryTable" data-order='[[ 1, "desc" ]]' width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>{% trans 'Applications' %}</th>
-              <th>{% trans 'Added' %}</th>
-              <th>{% trans 'Active' %}</th>
+              <th>{% trans "Applications" context "model_name" %}</th>
+              <th>{% trans "Added" context "model_field" %}</th>
+              <th>{% trans "Active" context "model_field" %}</th>
             </tr>
           </thead>
           <tbody>
@@ -58,7 +58,7 @@
       </div>
      {% else %}
       <div style="margin: 20px 0;">
-        {% trans "Select patient to see the history" as select_patient %}
+        {% trans "Select patient to see the history" as select_patient context 'action' %}
         {% bootstrap_alert select_patient alert_type='info' dismissable=False %}
       </div>
       {% endif %}
@@ -67,7 +67,7 @@
       {% if form_to_fill %}
         <form method="POST" style="margin-top: 20px; margin-bottom: 20px;">
           {% bootstrap_form form_to_fill layout='inline' %}
-          <button type="submit" class="btn btn-primary">{% trans 'Add' %}</button>
+          <button type="submit" class="btn btn-primary">{% trans 'Add' context 'action' %}</button>
         </form>
       {% else %}
        <div style="margin: 20px 0;">

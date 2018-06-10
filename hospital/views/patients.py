@@ -1,7 +1,7 @@
 from datetime import date
 
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django import forms
@@ -49,7 +49,7 @@ class PatientForm(forms.ModelForm):
                 full_name=self.cleaned_data['full_name'],
                 birthday=self.cleaned_data['birthday']
         ).exists():
-            raise forms.ValidationError(_("Patient already exists"))
+            raise forms.ValidationError(pgettext_lazy('error_msg', 'Patient already exists'))
 
 
 class PatientList(ListView):
