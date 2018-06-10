@@ -4,10 +4,9 @@ $(document).ready(function() {
     'language': {
       'url': "//cdn.datatables.net/plug-ins/1.10.16/i18n/Russian.json"
     },
-    'columns': [
-      null,
-      { "width": "140px" },
-      { "width": "80px" }
+    columnDefs: [
+        { targets: 'patientHistoryCol_Doctor', width: '160px'},
+        { targets: 'patientHistoryCol_Date', width: '140px'}
     ]
   });
 

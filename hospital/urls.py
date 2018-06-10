@@ -66,6 +66,7 @@ urlpatterns = [
     #      name='application-delete'),
 ]
 
+handler403 = 'hospital.views.errors.permission_denied'
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
