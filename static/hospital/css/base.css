@@ -486,3 +486,136 @@ footer.sticky-footer {
 .bootstrap3-multi-input > div {
   margin-right: 10px !important;
 }
+
+
+/* CUSTOM IOS8 CHECKBOX */
+.checkbox label {
+  display: inline-block;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.checkbox label i {
+  position: relative;
+  display: inline-block;
+  margin-right: .5rem;
+  width: 46px;
+  height: 26px;
+  background-color: #e6e6e6;
+  border-radius: 23px;
+  vertical-align: text-bottom;
+  transition: all 0.3s linear;
+}
+
+.checkbox label i::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 42px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 11px;
+  transform: translate3d(2px, 2px, 0) scale3d(1, 1, 1);
+  transition: all 0.25s linear;
+}
+
+.checkbox label i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 11px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24);
+  transform: translate3d(2px, 2px, 0);
+  transition: all 0.2s ease-in-out;
+}
+
+.checkbox label:active i::after {
+  width: 28px;
+  transform: translate3d(2px, 2px, 0);
+}
+
+.checkbox label:active input:checked + i::after { transform: translate3d(16px, 2px, 0); }
+
+.checkbox label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 26px;
+}
+
+.checkbox label input:checked + i { background-color: #4BD763; }
+
+.checkbox label input:checked + i::before { transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0); }
+
+.checkbox label input:checked + i::after { transform: translate3d(22px, 2px, 0); }
+
+
+/* TODO: another checkbox, delete later */
+/*!* Customize the label (the container) *!*/
+/*.checkbox label {*/
+  /*display: block;*/
+  /*position: relative;*/
+  /*padding-left: 35px;*/
+  /*margin-bottom: 12px;*/
+  /*cursor: pointer;*/
+  /*font-size: 22px;*/
+  /*-webkit-user-select: none;*/
+  /*-moz-user-select: none;*/
+  /*-ms-user-select: none;*/
+  /*user-select: none;*/
+/*}*/
+
+/*!* Hide the browser's default checkbox *!*/
+/*.checkbox label input {*/
+  /*position: absolute;*/
+  /*opacity: 0;*/
+  /*cursor: pointer;*/
+/*}*/
+
+/*!* Create a custom checkbox *!*/
+/*.checkmark {*/
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*height: 25px;*/
+  /*width: 25px;*/
+  /*background-color: #eee;*/
+/*}*/
+
+/*!* On mouse-over, add a grey background color *!*/
+/*.checkbox label:hover input ~ .checkmark {*/
+  /*background-color: #ccc;*/
+/*}*/
+
+/*!* When the checkbox is checked, add a blue background *!*/
+/*.checkbox label input:checked ~ .checkmark {*/
+  /*background-color: #2196F3;*/
+/*}*/
+
+/*!* Create the checkmark/indicator (hidden when not checked) *!*/
+/*.checkmark:after {*/
+  /*content: "";*/
+  /*position: absolute;*/
+  /*display: none;*/
+/*}*/
+
+/*!* Show the checkmark when checked *!*/
+/*.checkbox label input:checked ~ .checkmark:after {*/
+  /*display: block;*/
+/*}*/
+
+/*!* Style the checkmark/indicator *!*/
+/*.checkbox label .checkmark:after {*/
+  /*left: 9px;*/
+  /*top: 5px;*/
+  /*width: 5px;*/
+  /*height: 10px;*/
+  /*border: solid white;*/
+  /*border-width: 0 3px 3px 0;*/
+  /*-webkit-transform: rotate(45deg);*/
+  /*-ms-transform: rotate(45deg);*/
+  /*transform: rotate(45deg);*/
+/*}*/

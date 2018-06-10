@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 
 from hospital import models as hospital_models
 
@@ -28,7 +28,7 @@ class SelectForm(forms.Form):
                 'onchange': 'this.form.submit()',
                 'data-live-search': 'true',
                 'data-show-subtext': 'true',
-                'title': _('Choose Patient'),
+                'title': pgettext_lazy('action', 'Choose Patient'),
                 'data-width': '500px',
             }
         ),
@@ -41,7 +41,7 @@ class SelectForm(forms.Form):
                 'class': 'selectpicker',
                 'onchange': 'this.form.submit()',
                 'data-live-search': 'true',
-                'title': _('Choose Form'),
+                'title': pgettext_lazy('action', 'Choose Form'),
             }
         ),
         empty_label=None,
@@ -55,7 +55,6 @@ class SelectForm(forms.Form):
             self.fields['form'].queryset = hospital_models.Form.objects.filter(project=project)
 
 
-
 def make_form_fields(request, form):
 
     class FormFields(forms.Form):
@@ -63,8 +62,14 @@ def make_form_fields(request, form):
         def __init__(self, *args, **kwargs):
             super(FormFields, self).__init__(*args, **kwargs)
             for field in form.fields.all():
-                self.fields[str(field.id)] = field.type()
-                self.fields[str(field.id)].widget.attrs['placeholder'] = field.name
+                self.fields[str(field.id)] = field.type(required=field.required)
+                self.fields[str(field.id)].label = field.name
+                self.fields[str(field.id)].widget.attrs.update({
+                    'placeholder': field.name,
+                    'data-content': field.description,
+                    'data-toggle': 'popover',
+                    'class': 'col-8',
+                })
 
         def save(self):
             hospital_models.Application.objects.create(

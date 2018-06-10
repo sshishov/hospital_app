@@ -6,10 +6,10 @@
         {% for object in object_list %}
         <li>
             <a href="{% url "parameter-update" object.id %}">{{ object.name }}</a>
-            <a href="{% url "parameter-delete" object.id %}">{% trans "Delete" %}</a>
+            <a href="{% url "parameter-delete" object.id %}">{% trans "Delete" context "action" %}</a>
         </li>
         {% endfor %}
     </ul>
 
-    <a href="{% url "parameter-create" %}">{% trans "Add" %}</a>
+    <a href="{% url "parameter-create" %}">{% trans "Add" context "action" %}</a>
 {% endblock %}

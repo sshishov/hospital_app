@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-05 22:25+0000\n"
+"POT-Creation-Date: 2018-06-10 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,96 +21,187 @@ msgstr ""
 # ---------------------
 # language slection
 # ---------------------
+msgctxt "language"
 msgid "Russian"
 msgstr "Русский"
 
+msgctxt "language"
 msgid "English"
 msgstr "Английский"
 
+msgctxt "model_field"
 msgid "ID"
 msgstr "№"
 
+msgctxt "model_field"
 msgid "Added"
 msgstr "Добавлено"
 
+msgctxt "model_field"
 msgid "Updated"
 msgstr "Обновлено"
 
+msgctxt "model_field"
 msgid "Full Name"
 msgstr "Фамилия Имя Отчество"
 
+msgctxt "model_field"
 msgid "Birthday"
 msgstr "Дата рождения"
 
+msgctxt "model_name"
 msgid "Patient"
 msgstr "Пациент"
 
+msgctxt "model_name"
 msgid "Patients"
 msgstr "Пациенты"
 
+msgctxt "field_type"
 msgid "Integer"
 msgstr "Целое число"
 
+msgctxt "field_type"
 msgid "String"
 msgstr "Строка"
 
+msgctxt "field_type"
+msgid "Decimal"
+msgstr "Дробный"
+
+msgctxt "field_type"
+msgid "Multistring"
+msgstr "Многострочный текст"
+
+msgctxt "field_type"
+msgid "Boolean"
+msgstr "Да/Нет"
+
+msgctxt "field_type"
+msgid "Date"
+msgstr "Дата"
+
+msgctxt "field_type"
+msgid "Datetime"
+msgstr "Дата и время"
+
+msgctxt "model_field"
 msgid "Name"
 msgstr "Наименование"
 
+msgctxt "model_field"
 msgid "Description"
 msgstr "Описание"
 
+msgctxt "model_field"
 msgid "Type"
 msgstr "Тип"
 
+msgctxt "model_field"
+msgid "Required"
+msgstr "Обязательное"
+
+msgctxt "model_name"
 msgid "Parameter"
 msgstr "Параметр"
 
+msgctxt "model_name"
 msgid "Parameters"
 msgstr "Параметры"
 
+msgctxt "model_field"
+msgid "Parameter"
+msgstr "Параметр"
+
+msgctxt "model_field"
 msgid "Value"
 msgstr "Значение"
 
+msgctxt "model_field"
+msgid "Code"
+msgstr "Код"
+
+msgctxt "model_name"
 msgid "Project"
 msgstr "Проект"
 
+msgctxt "model_name"
 msgid "Projects"
 msgstr "Проекты"
 
+msgctxt "model_field"
 msgid "Fields"
 msgstr "Поля"
 
+msgctxt "model_field"
+msgid "Project"
+msgstr "Проект"
+
+msgctxt "model_name"
 msgid "Form"
 msgstr "Форма"
 
+msgctxt "model_name"
 msgid "Forms"
 msgstr "Формы"
 
+msgctxt "model_field"
 msgid "Doctor"
 msgstr "Доктор"
 
+msgctxt "model_field"
+msgid "Patient"
+msgstr "Пациент"
+
+msgctxt "model_field"
+msgid "Form"
+msgstr "Форма"
+
+msgctxt "model_field"
 msgid "Values"
 msgstr "Значения"
 
+msgctxt "model_field"
+msgid "Active"
+msgstr "Активный"
+
+msgctxt "model_field"
+msgid "Parent"
+msgstr "Родитель"
+
+msgctxt "model_name"
 msgid "Application"
 msgstr "Запись"
 
+msgctxt "model_name"
 msgid "Applications"
 msgstr "Записи"
 
+msgctxt "model_field"
+msgid "User"
+msgstr "Имя пользователя"
+
+msgctxt "model_field"
 msgid "City"
 msgstr "Город"
 
+msgctxt "model_field"
 msgid "Subject"
 msgstr "Субъект РФ"
 
+msgctxt "model_field"
 msgid "District"
 msgstr "Федеральный Округ"
 
+msgctxt "model_field"
+msgid "Projects"
+msgstr "Проекты"
+
+msgctxt "model_name"
 msgid "Profile"
 msgstr "Профиль"
 
+msgctxt "model_name"
 msgid "Profiles"
 msgstr "Профили"
 
@@ -129,27 +220,42 @@ msgstr "(все в одном)"
 msgid "Hospital Application"
 msgstr "Приложение для больниц"
 
+msgctxt "menu_item"
 msgid "Patient Creation"
 msgstr "Добавление пациента"
 
+msgctxt "menu_item"
 msgid "History and Form"
 msgstr "История и Форма"
 
+msgctxt "menu_item"
+msgid "Profile"
+msgstr "Профиль"
+
+msgctxt "menu_item"
+msgid "AdminPanel"
+msgstr "Админ-панель"
+
+msgctxt "action"
 msgid "Logout"
 msgstr "Выход"
 
+msgctxt "model_field"
 msgid "Username"
 msgstr "Имя пользователя"
 
 msgid "Available Projects"
 msgstr "Доступные проекты"
 
+msgctxt "action"
 msgid "Apply"
 msgstr "Применить"
 
+msgctxt "action"
 msgid "Add"
 msgstr "Добавить"
 
+msgctxt "action"
 msgid "Delete"
 msgstr "Удалить"
 
@@ -159,6 +265,7 @@ msgstr "История"
 msgid "New Application"
 msgstr "Новая запись"
 
+msgctxt "action"
 msgid "Select patient to see the history"
 msgstr "Выберите пациента, чтобы увидеть его историю"
 
@@ -174,27 +281,35 @@ msgstr "Войти"
 msgid "Forgot password"
 msgstr "Забыли пароль"
 
+msgctxt "success_msg"
 msgid "Password reset successfully"
 msgstr "Пароль успешно сброшен"
 
-msgid "Submit"
-msgstr "Применить"
+msgctxt "action"
+msgid "Log in"
+msgstr "Войти"
 
+msgctxt "error_msg"
 msgid "Password reset failed"
 msgstr "Сброс пароля неуспешен"
 
+msgctxt "success_msg"
 msgid "Email with password reset instructions has been sent."
 msgstr "Вам было отправлено письмо с инструкциями по сбросу пароля."
 
 #, python-format
+msgctxt "sucess_msg"
 msgid "Reset password at %(site_name)s"
 msgstr "Сброс пароля на %(site_name)s"
 
+msgctxt "action"
 msgid "Choose Patient"
 msgstr "Выберите пациента"
 
+msgctxt "action"
 msgid "Choose Form"
 msgstr "Выберите форму"
 
+msgctxt "error_msg"
 msgid "Patient already exists"
 msgstr "Пациент уже существует"

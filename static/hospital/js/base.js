@@ -10,4 +10,26 @@ $(document).ready(function() {
       { "width": "80px" }
     ]
   });
+
+  $('[data-toggle="popover"]').popover({
+    placement: 'left',
+    trigger: 'hover'
+  });
+
+  $.datetimepicker.setLocale('ru');
+
+  $('[data-provide="datepicker"]').datetimepicker({
+    timepicker:false,
+    onShow: function(){
+      this.setOptions({mask: true});
+    },
+    format: "d.m.Y"
+  });
+
+  $('[data-provide="datetimepicker"]').datetimepicker({
+    onShow: function(){
+      this.setOptions({mask: true});
+    },
+    format: "d.m.Y H:i:s"
+  });
 });

@@ -16,7 +16,7 @@ import sys
 
 import dj_database_url
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 
 from envparse import Env
 
@@ -185,8 +185,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'ru'
 
 LANGUAGES = [
-    ('ru', _('Russian')),
-    ('en', _('English')),
+    ('ru', pgettext_lazy('language', 'Russian')),
+    ('en', pgettext_lazy('language', 'English')),
 ]
 
 LOCALE_PATHS = (

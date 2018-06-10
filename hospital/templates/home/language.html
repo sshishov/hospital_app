@@ -1,4 +1,4 @@
-<form class="form-inline" action="{% url 'set_language' %}" method="POST">
+<form class="form-inline" action="{% url "set_language" %}" method="POST">
   {% csrf_token %}
   <input name="next" type="hidden" value="{{ redirect_to }}" />
   <div class="input-group mb-2 mr-sm-2">
