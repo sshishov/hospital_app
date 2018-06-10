@@ -34,8 +34,10 @@ class HospitalBooleanField(forms.BooleanField):
 
 
 class HospitalDateField(forms.DateField):
+    input_formats = ('%d.%m.%Y',)
     widget = HospitalDateInput
 
 
 class HospitalDateTimeField(forms.DateTimeField):
+    input_formats = ('%d.%m.%Y H:i:s',)
     widget = HospitalDateTimeInput

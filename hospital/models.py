@@ -1,3 +1,4 @@
+import datetime
 import logging
 import uuid
 
@@ -94,8 +95,13 @@ class ParameterValue(AbstractTimestampModel):
     @property
     def get_wrapped_value(self):
         value = self.value
-        if self.parameter.field_type == Parameter.PARAMETER_TYPE_MULTISTRING:
-            value = '<pre>{value}</pre>'.format(value=value)
+        if value is not None:
+            if self.parameter.field_type == Parameter.PARAMETER_TYPE_MULTISTRING:
+                value = '<pre>{value}</pre>'.format(value=value)
+            elif self.parameter.field_type == Parameter.PARAMETER_TYPE_DATETIME:
+                value = datetime.datetime.strptime(value, '%Y-%m-%d %H:%i:%s').strftime('%m.%d.%Y %H:%i:%s')
+            elif self.parameter.field_type == Parameter.PARAMETER_TYPE_DATE:
+                value = datetime.datetime.strptime(value, '%Y-%m-%d').strftime('%m.%d.%Y')
         return value
 
     def __str__(self):
