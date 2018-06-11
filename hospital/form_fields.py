@@ -41,3 +41,17 @@ class HospitalDateField(forms.DateField):
 class HospitalDateTimeField(forms.DateTimeField):
     input_formats = ('%d.%m.%Y H:i:s',)
     widget = HospitalDateTimeInput
+
+
+class HospitalSelectField(forms.ChoiceField):
+
+    def __init__(self, *args, **kwargs):
+        kwargs['choices'] = [('', '---'), ('a', 'a'), ('b', 'b'), ('c', 'c')]
+        super(HospitalSelectField, self).__init__(*args, **kwargs)
+
+
+class HospitalSelectMultipleField(forms.MultipleChoiceField):
+
+    def __init__(self, *args, **kwargs):
+        kwargs['choices'] = [('a', 'a'), ('b', 'b'), ('c', 'c')]
+        super(HospitalSelectMultipleField, self).__init__(*args, **kwargs)

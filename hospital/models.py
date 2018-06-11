@@ -54,6 +54,8 @@ class Parameter(AbstractTimestampModel):
     PARAMETER_TYPE_BOOLEAN = 5
     PARAMETER_TYPE_DATE = 6
     PARAMETER_TYPE_DATETIME = 7
+    PARAMETER_TYPE_SELECT = 8
+    PARAMETER_TYPE_SELECT_MULTIPLE = 9
     PARAMETER_TYPES = (
         (PARAMETER_TYPE_INTEGER, pgettext_lazy('field_type', 'Integer')),
         (PARAMETER_TYPE_STRING, pgettext_lazy('field_type', 'String')),
@@ -62,6 +64,8 @@ class Parameter(AbstractTimestampModel):
         (PARAMETER_TYPE_BOOLEAN, pgettext_lazy('field_type', 'Boolean')),
         (PARAMETER_TYPE_DATE, pgettext_lazy('field_type', 'Date')),
         (PARAMETER_TYPE_DATETIME, pgettext_lazy('field_type', 'Datetime')),
+        (PARAMETER_TYPE_SELECT, pgettext_lazy('field_type', 'Select')),
+        (PARAMETER_TYPE_SELECT_MULTIPLE, pgettext_lazy('field_type', 'Select Multiple')),
     )
     PARAMETER_TYPE_MAP = {
         PARAMETER_TYPE_INTEGER: forms.IntegerField,
@@ -71,6 +75,8 @@ class Parameter(AbstractTimestampModel):
         PARAMETER_TYPE_BOOLEAN: form_fields.HospitalBooleanField,
         PARAMETER_TYPE_DATE: form_fields.HospitalDateField,
         PARAMETER_TYPE_DATETIME: form_fields.HospitalDateTimeField,
+        PARAMETER_TYPE_SELECT: form_fields.HospitalSelectField,
+        PARAMETER_TYPE_SELECT_MULTIPLE: form_fields.HospitalSelectMultipleField,
     }
 
     name = models.CharField(max_length=30, verbose_name=pgettext_lazy('model_field', 'Name'))
@@ -128,7 +134,7 @@ class Project(AbstractTimestampModel):
 class Form(AbstractTimestampModel):
     name = models.CharField(max_length=30, verbose_name=pgettext_lazy('model_field', 'Name'))
     # fields = models.ArrayReferenceField(to='hospital.Parameter', null=True, blank=True, verbose_name=pgettext_lazy('model_field', 'Fields'))
-    fields = models.ManyToManyField(to='hospital.Parameter', verbose_name=pgettext_lazy('model_field', 'Fields'))
+    fields = models.ManyToManyField(to='hospital.Parameter', related_name='parameter', verbose_name=pgettext_lazy('model_field', 'Fields'))
     project = models.ForeignKey(to='hospital.Project', on_delete=models.CASCADE, verbose_name=pgettext_lazy('model_field', 'Project'))
     code = models.CharField(max_length=CODE_MAX_LENGTH, verbose_name=pgettext_lazy('model_field', 'Code'))
 
