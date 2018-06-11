@@ -9,7 +9,7 @@ class PatientAdmin(admin.ModelAdmin):
 
 
 class ParameterAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'created_at','updated_at')
+    list_display = ('name', 'description', 'created_at', 'updated_at')
     ordering = ('name',)
 
 

@@ -6,10 +6,9 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import pgettext_lazy
 
 from djongo import models
-from django import forms
 from django.conf import settings
 
-from . import form_fields
+import jsonfield
 
 logger = logging.getLogger(__name__)
 
@@ -67,30 +66,15 @@ class Parameter(AbstractTimestampModel):
         (PARAMETER_TYPE_SELECT, pgettext_lazy('field_type', 'Select')),
         (PARAMETER_TYPE_SELECT_MULTIPLE, pgettext_lazy('field_type', 'Select Multiple')),
     )
-    PARAMETER_TYPE_MAP = {
-        PARAMETER_TYPE_INTEGER: forms.IntegerField,
-        PARAMETER_TYPE_DECIMAL: forms.DecimalField,
-        PARAMETER_TYPE_STRING: forms.CharField,
-        PARAMETER_TYPE_MULTISTRING: form_fields.HospitalTextField,
-        PARAMETER_TYPE_BOOLEAN: form_fields.HospitalBooleanField,
-        PARAMETER_TYPE_DATE: form_fields.HospitalDateField,
-        PARAMETER_TYPE_DATETIME: form_fields.HospitalDateTimeField,
-        PARAMETER_TYPE_SELECT: form_fields.HospitalSelectField,
-        PARAMETER_TYPE_SELECT_MULTIPLE: form_fields.HospitalSelectMultipleField,
-    }
 
     name = models.CharField(max_length=30, verbose_name=pgettext_lazy('model_field', 'Name'))
     description = models.TextField(verbose_name=pgettext_lazy('model_field', 'Description'))
     field_type = models.IntegerField(choices=PARAMETER_TYPES, verbose_name=pgettext_lazy('model_field', 'Type'))
-    required = models.BooleanField(default=False, verbose_name=pgettext_lazy('model_field', 'Required'))
+    extra_params = jsonfield.JSONField(default=dict, verbose_name=pgettext_lazy('model_field', 'Extra Parameters'))
 
     class Meta:
         verbose_name = pgettext_lazy('model_name', 'Parameter')
         verbose_name_plural = pgettext_lazy('model_name', 'Parameters')
-
-    @property
-    def type(self):
-        return self.PARAMETER_TYPE_MAP[self.field_type]
 
     def __str__(self):
         return self.name
@@ -113,6 +97,8 @@ class ParameterValue(AbstractTimestampModel):
                 value = datetime.datetime.strptime(value, '%Y-%m-%d %H:%i:%s').strftime('%m.%d.%Y %H:%i:%s')
             elif self.parameter.field_type == Parameter.PARAMETER_TYPE_DATE:
                 value = datetime.datetime.strptime(value, '%Y-%m-%d').strftime('%m.%d.%Y')
+            elif self.parameter.field_type == Parameter.PARAMETER_TYPE_SELECT:
+                value = dict(self.parameter.extra_params['choices']).get(value, '')
         return value
 
     def __str__(self):
