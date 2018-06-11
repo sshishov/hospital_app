@@ -6,9 +6,9 @@ from .forms import fields as form_fields
 
 class ParameterFactory(object):
     PARAMETER_TYPE_MAP = {
-        hospital_models.Parameter.PARAMETER_TYPE_INTEGER: forms.IntegerField,
-        hospital_models.Parameter.PARAMETER_TYPE_DECIMAL: forms.DecimalField,
-        hospital_models.Parameter.PARAMETER_TYPE_STRING: forms.CharField,
+        hospital_models.Parameter.PARAMETER_TYPE_INTEGER: form_fields.HospitalIntegerField,
+        hospital_models.Parameter.PARAMETER_TYPE_DECIMAL: form_fields.HospitalDecimalField,
+        hospital_models.Parameter.PARAMETER_TYPE_STRING: form_fields.HospitalCharField,
         hospital_models.Parameter.PARAMETER_TYPE_MULTISTRING: form_fields.HospitalTextField,
         hospital_models.Parameter.PARAMETER_TYPE_BOOLEAN: form_fields.HospitalBooleanField,
         hospital_models.Parameter.PARAMETER_TYPE_DATE: form_fields.HospitalDateField,

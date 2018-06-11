@@ -10,6 +10,18 @@ class BaseHospitalFieldMixin(object):
         super(BaseHospitalFieldMixin, self).__init__(*args, **kwargs)
 
 
+class HospitalIntegerField(BaseHospitalFieldMixin, forms.IntegerField):
+    pass
+
+
+class HospitalDecimalField(BaseHospitalFieldMixin, forms.DecimalField):
+    pass
+
+
+class HospitalCharField(BaseHospitalFieldMixin, forms.CharField):
+    pass
+
+
 class HospitalTextField(BaseHospitalFieldMixin, forms.CharField):
     widget = forms.Textarea
 
