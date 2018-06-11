@@ -2,6 +2,7 @@ import datetime
 import logging
 import uuid
 
+from django.contrib.auth.models import AbstractUser
 from django.utils.translation import pgettext_lazy
 
 from djongo import models
@@ -26,6 +27,10 @@ class AbstractTimestampModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class User(AbstractTimestampModel, AbstractUser):
+    pass
 
 
 class Patient(AbstractTimestampModel):
@@ -140,7 +145,7 @@ class Form(AbstractTimestampModel):
 
 
 class Application(AbstractTimestampModel):
-    doctor = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name=pgettext_lazy('model_field', 'Doctor'))
+    doctor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=pgettext_lazy('model_field', 'Doctor'))
     patient = models.ForeignKey('hospital.Patient', on_delete=models.CASCADE, verbose_name=pgettext_lazy('model_field', 'Patient'))
     form = models.ForeignKey('hospital.Form', on_delete=models.CASCADE, verbose_name=pgettext_lazy('model_field', 'Form'))
     values = models.ArrayModelField(model_container=ParameterValue, verbose_name=pgettext_lazy('model_field', 'Values'))
