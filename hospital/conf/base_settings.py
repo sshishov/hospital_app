@@ -320,3 +320,5 @@ BOOTSTRAP3 = {
     # Include jQuery with Bootstrap JavaScript (affects django-bootstrap3 template tags)
     'include_jquery': True,
 }
+
+AUTH_USER_MODEL = 'hospital.User'
