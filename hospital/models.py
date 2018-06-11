@@ -150,6 +150,10 @@ class Application(AbstractTimestampModel):
     class Meta:
         verbose_name = pgettext_lazy('model_name', 'Application')
         verbose_name_plural = pgettext_lazy('model_name', 'Applications')
+        permissions = (
+            ('manage_application', 'Can manage applications'),
+            ('supervise_application', 'Can supervise applications per project'),
+        )
 
     def __str__(self):
         return '{obj.form.project.code}:{obj.form.code}:{obj.values}'.format(obj=self)

@@ -6,19 +6,14 @@ from django.db import migrations
 from django.core.management.sql import emit_post_migrate_signal
 
 
-PERMISSIONS_TO_CREATE = (
-    ('manage_application', 'Can manage applications', 'Application'),
-    ('supervise_application', 'Can supervise applications per project', 'Application'),
-)
-SUPERVISOR_PERMISSIONS = (PERMISSIONS_TO_CREATE[0][0], PERMISSIONS_TO_CREATE[1][0], 'add_application', 'add_patient')
-DOCTOR_PERMISSIONS = (PERMISSIONS_TO_CREATE[0][0], 'add_application', 'add_patient')
+SUPERVISOR_PERMISSIONS = ('manage_application', 'supervise_application', 'add_application', 'add_patient')
+DOCTOR_PERMISSIONS = ('manage_application', 'add_application', 'add_patient')
 
 
 def append_perms_and_groups(apps, schema_editor):
     # Get models that we needs them
     Permission = apps.get_model('auth', 'Permission')
     Group = apps.get_model('auth', 'Group')
-    ContentType = apps.get_model('contenttypes', 'ContentType')
 
     # Run post-migrate manually to create default permissions
     emit_post_migrate_signal(
@@ -27,14 +22,6 @@ def append_perms_and_groups(apps, schema_editor):
         db='default',
         db_alias=schema_editor.connection.alias,
     )
-
-    # Append custom permissions
-    for codename, description, app in PERMISSIONS_TO_CREATE:
-        Permission.objects.get_or_create(
-            codename=codename,
-            name=description,
-            content_type=ContentType.objects.get_for_model(apps.get_model('hospital', app))
-        )
 
     # Groups Creation
     supervisors_group = Group.objects.get_or_create(name='Supervisors')[0]
@@ -47,14 +34,10 @@ def append_perms_and_groups(apps, schema_editor):
 
 def remove_perms_and_groups(apps, schema_editor):
     # Get models that we needs them
-    Permission = apps.get_model('auth', 'Permission')
     Group = apps.get_model('auth', 'Group')
 
     # Groups Deletion
     Group.objects.filter(name__in=('Supervisors', 'Doctors')).delete()
-
-    # Delete permissions
-    Permission.objects.filter(codename__in=(item[0] for item in PERMISSIONS_TO_CREATE))
 
 
 class Migration(migrations.Migration):
