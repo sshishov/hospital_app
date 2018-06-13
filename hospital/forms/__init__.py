@@ -1,12 +1,12 @@
-from django import forms
+from django import forms as django_forms
 from django.utils.translation import pgettext_lazy
 
 from .. import models as hospital_models
 from .. import widgets
 
 
-class SelectForm(forms.Form):
-    patient = forms.ModelChoiceField(
+class SelectForm(django_forms.Form):
+    patient = django_forms.ModelChoiceField(
         queryset=hospital_models.Patient.objects.all(),
         widget=widgets.PatientSelect(
             attrs={
@@ -20,9 +20,9 @@ class SelectForm(forms.Form):
         ),
         empty_label=None,
     )
-    form = forms.ModelChoiceField(
+    form = django_forms.ModelChoiceField(
         queryset=hospital_models.Form.objects.none(),
-        widget=forms.Select(
+        widget=django_forms.Select(
             attrs={
                 'class': 'selectpicker',
                 'onchange': 'this.form.submit()',

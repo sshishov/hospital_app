@@ -76,8 +76,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'stronghold',
     'bootstrap3',
+    'jsoneditor',
+    'stronghold',
 
     'hospital',
 ]
@@ -322,3 +323,7 @@ BOOTSTRAP3 = {
 }
 
 AUTH_USER_MODEL = 'hospital.User'
+
+# JsonEditor settings
+JSON_EDITOR_JS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/4.2.1/jsoneditor.js'
+JSON_EDITOR_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/4.2.1/jsoneditor.css'
