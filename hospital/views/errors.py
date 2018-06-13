@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 
 
 def permission_denied(request, exception):
@@ -8,6 +8,6 @@ def permission_denied(request, exception):
         template_name='hospital/error.html',
         context={
             'error_num': 403,
-            'error_text': _('Forbidden'),
+            'error_text': pgettext_lazy('error_msg', 'Forbidden'),
         },
     )

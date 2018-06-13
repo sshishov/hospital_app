@@ -3,51 +3,44 @@ from django import forms
 from . import widgets
 
 
-class BaseHospitalFieldMixin(object):
-    def __init__(self, *args, **kwargs):
-        if 'required' not in kwargs:
-            kwargs['required'] = False
-        super(BaseHospitalFieldMixin, self).__init__(*args, **kwargs)
-
-
-class HospitalIntegerField(BaseHospitalFieldMixin, forms.IntegerField):
+class HospitalIntegerField(forms.IntegerField):
     pass
 
 
-class HospitalDecimalField(BaseHospitalFieldMixin, forms.DecimalField):
+class HospitalDecimalField(forms.DecimalField):
     pass
 
 
-class HospitalCharField(BaseHospitalFieldMixin, forms.CharField):
+class HospitalCharField(forms.CharField):
     pass
 
 
-class HospitalTextField(BaseHospitalFieldMixin, forms.CharField):
+class HospitalTextField(forms.CharField):
     widget = forms.Textarea
 
 
-class HospitalBooleanField(BaseHospitalFieldMixin, forms.BooleanField):
+class HospitalBooleanField(forms.BooleanField):
     widget = widgets.HospitalCheckboxInput
 
 
-class HospitalDateField(BaseHospitalFieldMixin, forms.DateField):
+class HospitalDateField(forms.DateField):
     input_formats = ('%d.%m.%Y',)
     widget = widgets.HospitalDateInput
 
 
-class HospitalDateTimeField(BaseHospitalFieldMixin, forms.DateTimeField):
+class HospitalDateTimeField(forms.DateTimeField):
     input_formats = ('%d.%m.%Y H:i:s',)
     widget = widgets.HospitalDateTimeInput
 
 
-class HospitalSelectField(BaseHospitalFieldMixin, forms.ChoiceField):
+class HospitalSelectField(forms.ChoiceField):
 
     def __init__(self, *args, **kwargs):
         kwargs['choices'] = [('', '---')] + kwargs.get('choices', [])
         super(HospitalSelectField, self).__init__(*args, **kwargs)
 
 
-class HospitalSelectMultipleField(BaseHospitalFieldMixin, forms.MultipleChoiceField):
+class HospitalSelectMultipleField(forms.MultipleChoiceField):
 
     def __init__(self, *args, **kwargs):
         super(HospitalSelectMultipleField, self).__init__(*args, **kwargs)
