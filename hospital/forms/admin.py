@@ -55,11 +55,8 @@ class ParameterForm(forms.ModelForm):
                         self.add_error(
                             field='extra_params',
                             error=pgettext(
-                                'error_msg',
-                                '{item}: Field `choices` should consist of iterables (value, description)'.format(
-                                    item=item,
-                                ),
-                            ),
+                                'error_msg', '{item}: Field `choices` should consist of iterables (value, description)',
+                            ).format(item=item),
                         )
             extra_params['choices'] = choices
 
@@ -67,11 +64,8 @@ class ParameterForm(forms.ModelForm):
             self.add_error(
                 field='extra_params',
                 error=pgettext(
-                    'error_msg',
-                    'Incorrect value provided: {incorrect_values}. Valid choices are: {available}'.format(
-                        available=available, incorrect_values=set(extra_params) - set(available)
-                    ),
-                ),
+                    'error_msg', 'Incorrect value provided: {incorrect_values}. Valid choices are: {available}',
+                ).format(available=available, incorrect_values=set(extra_params) - set(available)),
             )
         else:
             cleaned_data['extra_params'] = extra_params
