@@ -29,7 +29,10 @@ class AbstractTimestampModel(models.Model):
 
 
 class User(AbstractTimestampModel, AbstractUser):
-    pass
+
+    class Meta:
+        verbose_name = pgettext_lazy('model_name', 'User')
+        verbose_name_plural = pgettext_lazy('model_name', 'Users')
 
 
 class Patient(AbstractTimestampModel):
