@@ -48,8 +48,7 @@ RUN su $APP_USER -l -c "mkdir -p $VENV_DIR && virtualenv --system-site-packages 
 # Copy over python requirements and install
 COPY requirements/*.txt /tmp/requirements/
 RUN set -e; \
-    su $APP_USER -l -c "$VENV_BIN/pip install -r /tmp/requirements/production.txt"; \
-    su $APP_USER -l -c "$VENV_BIN/python $APP_DIR/manage.py compilemessages"
+    su $APP_USER -l -c "$VENV_BIN/pip install -r /tmp/requirements/production.txt"
 
 # Copy the archive and grant permissions
 ADD docker/archive.tar.gz $APP_DIR

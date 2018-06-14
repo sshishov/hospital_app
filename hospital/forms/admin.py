@@ -1,5 +1,5 @@
 from django import forms
-from django.utils.translation import pgettext_lazy
+from django.utils.translation import pgettext
 
 from jsoneditor.fields.django_jsonfield import JSONFormField
 
@@ -39,7 +39,7 @@ class ParameterForm(forms.ModelForm):
             available.append('required')
             if not isinstance(required, bool):
                 self.add_error(
-                    field='extra_params', error=pgettext_lazy('error_msg', 'Field `required` should be boolean'),
+                    field='extra_params', error=pgettext('error_msg', 'Field `required` should be boolean'),
                 )
             extra_params['required'] = required
         if field_type in ParameterForm.CHOICES:
@@ -47,14 +47,14 @@ class ParameterForm(forms.ModelForm):
             available.append('choices')
             if not isinstance(choices, (list, tuple)):
                 self.add_error(
-                    field='extra_params', error=pgettext_lazy('error_msg', 'Field `choices` should be iterable'),
+                    field='extra_params', error=pgettext('error_msg', 'Field `choices` should be iterable'),
                 )
             else:
                 for item in choices:
                     if not isinstance(item, (list, tuple)) or len(item) != 2:
                         self.add_error(
                             field='extra_params',
-                            error=pgettext_lazy(
+                            error=pgettext(
                                 'error_msg',
                                 '{item}: Field `choices` should consist of iterables (value, description)'.format(
                                     item=item,
@@ -66,7 +66,7 @@ class ParameterForm(forms.ModelForm):
         if set(extra_params) - set(available):
             self.add_error(
                 field='extra_params',
-                error=pgettext_lazy(
+                error=pgettext(
                     'error_msg',
                     'Incorrect value provided: {incorrect_values}. Valid choices are: {available}'.format(
                         available=available, incorrect_values=set(extra_params) - set(available)
