@@ -247,7 +247,7 @@ LOGGING = {
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': '{logging_dir}/hospital_app.log'.format(logging_dir=env('LOG_DIR')),
             'formatter': 'default',
-            'filters': ['request_id', 'require_debug_true'],
+            'filters': ['request_id', 'require_debug_false'],
             'maxBytes': 1024 * 1024,
             'backupCount': 3,
         },
