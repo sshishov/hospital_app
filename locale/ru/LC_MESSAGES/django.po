@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-16 20:20+0000\n"
+"POT-Creation-Date: 2018-06-16 23:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,8 +151,8 @@ msgstr "Поле `choices` должно быть списком"
 
 #, python-brace-format
 msgctxt "error_msg"
-msgid "{item}: Field `choices` should consist of iterables (value, description)"
-msgstr "{item}: Значения поля должны быть состалены из списка/кортежа (значение, описание)"
+msgid "{item}: Field `choices` should consist of strings"
+msgstr "{item}: Значения поля `choices` должны состоять из строк"
 
 #, python-brace-format
 msgctxt "error_msg"
