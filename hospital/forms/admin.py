@@ -43,8 +43,13 @@ class ParameterForm(forms.ModelForm):
                 )
             extra_params['required'] = required
         if field_type in ParameterForm.CHOICES:
+            available.extend(['choices', 'search_support'])
+            search = extra_params.get('search_support', False)
             choices = extra_params.get('choices', [])
-            available.append('choices')
+            if not isinstance(search, bool):
+                self.add_error(
+                    field='extra_params', error=pgettext('error_msg', 'Field `search_support` should be boolean'),
+                )
             if not isinstance(choices, (list, tuple)):
                 self.add_error(
                     field='extra_params', error=pgettext('error_msg', 'Field `choices` should be iterable'),
@@ -58,6 +63,7 @@ class ParameterForm(forms.ModelForm):
                                 'error_msg', '{item}: Field `choices` should consist of iterables (value, description)',
                             ).format(item=item),
                         )
+            extra_params['search_support'] = search
             extra_params['choices'] = choices
 
         if set(extra_params) - set(available):

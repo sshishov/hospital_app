@@ -19,6 +19,8 @@ class ParameterFactory(object):
 
     @classmethod
     def get(cls, field, *args, **kwargs):
+        kwargs['label'] = field.name
+        kwargs['help_text'] = field.description
         params = {**kwargs, **field.extra_params}
         return cls.PARAMETER_TYPE_MAP[field.field_type](*args, **params)
 
@@ -31,13 +33,6 @@ def make_form_fields(request, form):
             super(FormFields, self).__init__(*args, **kwargs)
             for field in form.fields.all():
                 self.fields[str(field.id)] = ParameterFactory.get(field)
-                self.fields[str(field.id)].label = field.name
-                self.fields[str(field.id)].widget.attrs.update({
-                    'placeholder': field.name,
-                    'data-content': field.description,
-                    'data-toggle': 'popover',
-                    'class': 'col-8',
-                })
 
         def save(self):
             hospital_models.Application.objects.create(
