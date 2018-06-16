@@ -1,9 +1,11 @@
+from collections import defaultdict
 import datetime
 import logging
 import uuid
 
 from django.contrib.auth.models import AbstractUser
-from django.utils.translation import pgettext_lazy
+from django.core.exceptions import ValidationError
+from django.utils.translation import pgettext, pgettext_lazy
 
 from djongo import models
 from django.conf import settings
@@ -70,6 +72,22 @@ class Parameter(AbstractTimestampModel):
         (PARAMETER_TYPE_SELECT_MULTIPLE, pgettext_lazy('field_type', 'Select Multiple')),
     )
 
+    REQUIRED = (
+        PARAMETER_TYPE_INTEGER,
+        PARAMETER_TYPE_DECIMAL,
+        PARAMETER_TYPE_STRING,
+        PARAMETER_TYPE_MULTISTRING,
+        PARAMETER_TYPE_BOOLEAN,
+        PARAMETER_TYPE_DATE,
+        PARAMETER_TYPE_DATETIME,
+        PARAMETER_TYPE_SELECT,
+        PARAMETER_TYPE_SELECT_MULTIPLE,
+    )
+    CHOICES = (
+        PARAMETER_TYPE_SELECT,
+        PARAMETER_TYPE_SELECT_MULTIPLE,
+    )
+
     name = models.CharField(max_length=30, verbose_name=pgettext_lazy('model_field', 'Name'))
     description = models.TextField(verbose_name=pgettext_lazy('model_field', 'Description'))
     field_type = models.IntegerField(choices=PARAMETER_TYPES, verbose_name=pgettext_lazy('model_field', 'Type'))
@@ -81,6 +99,47 @@ class Parameter(AbstractTimestampModel):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        cleaned_data = super().clean()
+        available = []
+        errors = defaultdict(list)
+        if self.field_type in self.REQUIRED:
+            required = self.extra_params.get('required', False)
+            available.append('required')
+            if not isinstance(required, bool):
+                errors['extra_params'].append(pgettext('error_msg', 'Field `required` should be boolean'))
+            self.extra_params['required'] = required
+        if self.field_type in self.CHOICES:
+            available.extend(['choices', 'search_support'])
+            search = self.extra_params.get('search_support', False)
+            choices = self.extra_params.get('choices', [])
+            if not isinstance(search, bool):
+                errors['extra_params'].append(pgettext('error_msg', 'Field `search_support` should be boolean'))
+            if not isinstance(choices, (list, tuple)):
+                errors['extra_params'].append(pgettext('error_msg', 'Field `choices` should be iterable'))
+            else:
+                for item in choices:
+                    if not isinstance(item, (list, tuple)) or len(item) != 2:
+                        errors['extra_params'].append(
+                            pgettext(
+                                'error_msg', '{item}: Field `choices` should consist of iterables (value, description)',
+                            ).format(item=item),
+                        )
+                    # Set key of select's choice as string to avoid confusion
+                    item[0] = str(item[0])
+            self.extra_params['search_support'] = search
+            self.extra_params['choices'] = choices
+
+        if set(self.extra_params) - set(available):
+            errors['extra_params'].append(
+                pgettext(
+                    'error_msg', 'Incorrect value provided: {incorrect_values}. Valid choices are: {available}',
+                ).format(available=available, incorrect_values=set(self.extra_params) - set(available)),
+            )
+        if errors:
+            raise ValidationError(errors)
+        return cleaned_data
 
 
 class ParameterValue(AbstractTimestampModel):
