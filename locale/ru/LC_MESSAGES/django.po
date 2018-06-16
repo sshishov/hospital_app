@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-14 00:27+0000\n"
+"POT-Creation-Date: 2018-06-16 20:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,24 +40,6 @@ msgstr "Выберите пациента"
 msgctxt "action"
 msgid "Choose Form"
 msgstr "Выберите форму"
-
-msgctxt "error_msg"
-msgid "Field `required` should be boolean"
-msgstr "Поле `required` должно быть логическим"
-
-msgctxt "error_msg"
-msgid "Field `choices` should be iterable"
-msgstr "Поле `choices` должно быть списком"
-
-#, python-brace-format
-msgctxt "error_msg"
-msgid "{item}: Field `choices` should consist of iterables (value, description)"
-msgstr "{item}: Значения поля должны быть состалены из списка/кортежа (значение, описание)"
-
-#, python-brace-format
-msgctxt "error_msg"
-msgid "Incorrect value provided: {incorrect_values}. Valid choices are: {available}"
-msgstr "Неправильные параметры введены: {incorrect_values}. Правильные параметры: {available}"
 
 msgctxt "model_field"
 msgid "ID"
@@ -154,6 +136,28 @@ msgstr "Параметр"
 msgctxt "model_name"
 msgid "Parameters"
 msgstr "Параметры"
+
+msgctxt "error_msg"
+msgid "Field `required` should be boolean"
+msgstr "Поле `required` должно быть логическим"
+
+msgctxt "error_msg"
+msgid "Field `search_support` should be boolean"
+msgstr "Поле `search_support` должно быть логическим"
+
+msgctxt "error_msg"
+msgid "Field `choices` should be iterable"
+msgstr "Поле `choices` должно быть списком"
+
+#, python-brace-format
+msgctxt "error_msg"
+msgid "{item}: Field `choices` should consist of iterables (value, description)"
+msgstr "{item}: Значения поля должны быть состалены из списка/кортежа (значение, описание)"
+
+#, python-brace-format
+msgctxt "error_msg"
+msgid "Incorrect value provided: {incorrect_values}. Valid choices are: {available}"
+msgstr "Неправильные параметры введены: {incorrect_values}. Правильные параметры: {available}"
 
 msgctxt "model_field"
 msgid "Parameter"
