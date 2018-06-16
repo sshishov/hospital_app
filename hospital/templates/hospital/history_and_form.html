@@ -52,7 +52,7 @@
               <td>
                 {% for value in history.values %}
                 {% autoescape off %}
-                <b>{{ value.parameter }}</b>: {{ value.get_wrapped_value }}
+                <b>{{ value.parameter }}</b>: {{ value.get_wrapped_value|default_if_none:"" }}
                 {% if forloop.last %}{% else %}<br/>{% endif %}
                 {% endautoescape %}
                 {% endfor %}

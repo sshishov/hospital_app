@@ -1,16 +1,18 @@
+import ast
 from collections import defaultdict
 import datetime
 import logging
 import uuid
 
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.utils.translation import pgettext, pgettext_lazy
 
 from djongo import models
-from django.conf import settings
+from djongo.models import json
 
-import jsonfield
+from . import utils
 
 logger = logging.getLogger(__name__)
 
@@ -91,7 +93,7 @@ class Parameter(AbstractTimestampModel):
     name = models.CharField(max_length=30, verbose_name=pgettext_lazy('model_field', 'Name'))
     description = models.TextField(verbose_name=pgettext_lazy('model_field', 'Description'))
     field_type = models.IntegerField(choices=PARAMETER_TYPES, verbose_name=pgettext_lazy('model_field', 'Type'))
-    extra_params = jsonfield.JSONField(default=dict, verbose_name=pgettext_lazy('model_field', 'Extra Parameters'))
+    extra_params = json.JSONField(default=dict, verbose_name=pgettext_lazy('model_field', 'Extra Parameters'))
 
     class Meta:
         verbose_name = pgettext_lazy('model_name', 'Parameter')
@@ -120,14 +122,12 @@ class Parameter(AbstractTimestampModel):
                 errors['extra_params'].append(pgettext('error_msg', 'Field `choices` should be iterable'))
             else:
                 for item in choices:
-                    if not isinstance(item, (list, tuple)) or len(item) != 2:
+                    if not isinstance(item, str):
                         errors['extra_params'].append(
                             pgettext(
-                                'error_msg', '{item}: Field `choices` should consist of iterables (value, description)',
+                                'error_msg', '{item}: Field `choices` should consist of strings',
                             ).format(item=item),
                         )
-                    # Set key of select's choice as string to avoid confusion
-                    item[0] = str(item[0])
             self.extra_params['search_support'] = search
             self.extra_params['choices'] = choices
 
@@ -160,7 +160,14 @@ class ParameterValue(AbstractTimestampModel):
             elif self.parameter.field_type == Parameter.PARAMETER_TYPE_DATE:
                 value = datetime.datetime.strptime(value, '%Y-%m-%d').strftime('%m.%d.%Y')
             elif self.parameter.field_type == Parameter.PARAMETER_TYPE_SELECT:
-                value = dict(self.parameter.extra_params['choices']).get(value, '')
+                value = dict(utils.generate_choices(self.parameter.extra_params['choices'])).get(value)
+            elif self.parameter.field_type == Parameter.PARAMETER_TYPE_SELECT_MULTIPLE:
+                value = ', '.join(
+                    [
+                        dict(utils.generate_choices(self.parameter.extra_params['choices'])).get(value)
+                        for value in ast.literal_eval(value)
+                    ]
+                )
         return value
 
     def __str__(self):

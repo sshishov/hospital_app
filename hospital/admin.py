@@ -2,7 +2,6 @@ from django.contrib import admin as django_admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from . import models as hospital_models
-from .forms import admin as admin_hospital_forms
 
 
 class PatientAdmin(django_admin.ModelAdmin):
@@ -12,7 +11,6 @@ class PatientAdmin(django_admin.ModelAdmin):
 class ParameterAdmin(django_admin.ModelAdmin):
     list_display = ('name', 'description', 'created_at', 'updated_at')
     ordering = ('name',)
-    form = admin_hospital_forms.ParameterForm
 
 
 class ProjectAdmin(django_admin.ModelAdmin):

@@ -1,6 +1,9 @@
 from django import forms
 
+from multiselectfield.forms.fields import MultiSelectFormField
+
 from . import widgets
+from .. import utils
 
 
 class HospitalBaseMixin(object):
@@ -27,6 +30,7 @@ class HospitalBaseMixin(object):
 class HospitalSelectMixin(HospitalBaseMixin):
 
     def __init__(self, *args, **kwargs):
+        kwargs['choices'] = utils.generate_choices(kwargs.get('choices', []))
         self.search_support = kwargs.pop('search_support', False)
         super().__init__(*args, **kwargs)
 
@@ -72,5 +76,5 @@ class HospitalSelectField(HospitalSelectMixin, forms.ChoiceField):
     widget = widgets.HospitalSelect
 
 
-class HospitalSelectMultipleField(HospitalSelectMixin, forms.MultipleChoiceField):
+class HospitalSelectMultipleField(HospitalSelectMixin, MultiSelectFormField):
     widget = widgets.HospitalMultiSelect
