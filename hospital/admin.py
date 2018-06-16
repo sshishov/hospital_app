@@ -1,32 +1,34 @@
-from django.contrib import admin
+from django.contrib import admin as django_admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from . import models
+from . import models as hospital_models
+from .forms import admin as admin_hospital_forms
 
 
-class PatientAdmin(admin.ModelAdmin):
+class PatientAdmin(django_admin.ModelAdmin):
     pass
 
 
-class ParameterAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'created_at','updated_at')
+class ParameterAdmin(django_admin.ModelAdmin):
+    list_display = ('name', 'description', 'created_at', 'updated_at')
     ordering = ('name',)
+    form = admin_hospital_forms.ParameterForm
 
 
-class ProjectAdmin(admin.ModelAdmin):
+class ProjectAdmin(django_admin.ModelAdmin):
     list_display = ('name', 'created_at', 'updated_at')
 
 
-class ApplicationAdmin(admin.ModelAdmin):
+class ApplicationAdmin(django_admin.ModelAdmin):
     pass
 
 
-class FormAdmin(admin.ModelAdmin):
+class FormAdmin(django_admin.ModelAdmin):
     list_display = ('name', 'form_fields', 'created_at', 'updated_at')
 
 
-class UserProfileInline(admin.StackedInline):
-    model = models.UserProfile
+class UserProfileInline(django_admin.StackedInline):
+    model = hospital_models.UserProfile
     can_delete = False
 
 
@@ -36,9 +38,9 @@ class UserAdmin(BaseUserAdmin):
 
 
 # Register other required models for admin part
-admin.site.register(models.User, UserAdmin)
-admin.site.register(models.Patient, PatientAdmin)
-admin.site.register(models.Parameter, ParameterAdmin)
-admin.site.register(models.Project, ProjectAdmin)
-admin.site.register(models.Application, ApplicationAdmin)
-admin.site.register(models.Form, FormAdmin)
+django_admin.site.register(hospital_models.User, UserAdmin)
+django_admin.site.register(hospital_models.Patient, PatientAdmin)
+django_admin.site.register(hospital_models.Parameter, ParameterAdmin)
+django_admin.site.register(hospital_models.Project, ProjectAdmin)
+django_admin.site.register(hospital_models.Application, ApplicationAdmin)
+django_admin.site.register(hospital_models.Form, FormAdmin)

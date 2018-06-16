@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-10 23:23+0000\n"
+"POT-Creation-Date: 2018-06-14 00:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgctxt "app_name"
+msgid "Hospital"
+msgstr "Больница"
 
 # ---------------------
 # language slection
@@ -29,6 +33,32 @@ msgctxt "language"
 msgid "English"
 msgstr "Английский"
 
+msgctxt "action"
+msgid "Choose Patient"
+msgstr "Выберите пациента"
+
+msgctxt "action"
+msgid "Choose Form"
+msgstr "Выберите форму"
+
+msgctxt "error_msg"
+msgid "Field `required` should be boolean"
+msgstr "Поле `required` должно быть логическим"
+
+msgctxt "error_msg"
+msgid "Field `choices` should be iterable"
+msgstr "Поле `choices` должно быть списком"
+
+#, python-brace-format
+msgctxt "error_msg"
+msgid "{item}: Field `choices` should consist of iterables (value, description)"
+msgstr "{item}: Значения поля должны быть состалены из списка/кортежа (значение, описание)"
+
+#, python-brace-format
+msgctxt "error_msg"
+msgid "Incorrect value provided: {incorrect_values}. Valid choices are: {available}"
+msgstr "Неправильные параметры введены: {incorrect_values}. Правильные параметры: {available}"
+
 msgctxt "model_field"
 msgid "ID"
 msgstr "№"
@@ -40,6 +70,14 @@ msgstr "Добавлено"
 msgctxt "model_field"
 msgid "Updated"
 msgstr "Обновлено"
+
+msgctxt "model_name"
+msgid "User"
+msgstr "Пользователь"
+
+msgctxt "model_name"
+msgid "Users"
+msgstr "Пользователи"
 
 msgctxt "model_field"
 msgid "Full Name"
@@ -75,7 +113,7 @@ msgstr "Многострочный текст"
 
 msgctxt "field_type"
 msgid "Boolean"
-msgstr "Да/Нет"
+msgstr "Логическое"
 
 msgctxt "field_type"
 msgid "Date"
@@ -84,6 +122,14 @@ msgstr "Дата"
 msgctxt "field_type"
 msgid "Datetime"
 msgstr "Дата и время"
+
+msgctxt "field_type"
+msgid "Select"
+msgstr "Выбор"
+
+msgctxt "field_type"
+msgid "Select Multiple"
+msgstr "Множественный выбор"
 
 msgctxt "model_field"
 msgid "Name"
@@ -98,8 +144,8 @@ msgid "Type"
 msgstr "Тип"
 
 msgctxt "model_field"
-msgid "Required"
-msgstr "Обязательное"
+msgid "Extra Parameters"
+msgstr "Дополнительные параметры"
 
 msgctxt "model_name"
 msgid "Parameter"
@@ -306,16 +352,9 @@ msgctxt "sucess_msg"
 msgid "Reset password at %(site_name)s"
 msgstr "Сброс пароля на %(site_name)s"
 
+msgctxt "error_msg"
 msgid "Forbidden"
-msgstr ""
-
-msgctxt "action"
-msgid "Choose Patient"
-msgstr "Выберите пациента"
-
-msgctxt "action"
-msgid "Choose Form"
-msgstr "Выберите форму"
+msgstr "Доступ запрещен"
 
 msgctxt "error_msg"
 msgid "Patient already exists"
