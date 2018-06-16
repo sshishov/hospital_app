@@ -17,6 +17,8 @@ class HospitalBaseMixin(object):
         attrs = super().widget_attrs(widget)
         attrs.update({
             'data-toggle': 'popover',
+            'title': self.label,
+            'data-content': self.help_text,
         })
         attrs = self.add_class(attrs, 'col-8')
         return attrs
@@ -34,8 +36,6 @@ class HospitalSelectMixin(HospitalBaseMixin):
         if self.search_support:
             attrs['data-live-search'] = 'true'
         return attrs
-
-    # def use_required_attribute(self):
 
 
 class HospitalIntegerField(HospitalBaseMixin, forms.IntegerField):

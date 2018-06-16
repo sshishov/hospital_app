@@ -10,9 +10,28 @@ $(document).ready(function() {
     ]
   });
 
-  $('[data-toggle="popover"]').popover({
-    placement: 'left',
-    trigger: 'hover'
+  $('[data-toggle="popover"]').each(function() {
+    if ($(this).parent().hasClass('bootstrap-select')) {
+      $(this).parent().popover({
+        placement: 'left',
+        trigger: 'hover',
+        content: $(this).data('content'),
+        title: $(this).attr('title')
+      })
+    } else if ($(this).parent().parent().hasClass('checkbox')){
+      $(this).parent().addClass('col-8')
+      $(this).parent().popover({
+        placement: 'left',
+        trigger: 'hover',
+        content: $(this).data('content'),
+        title: $(this).attr('title')
+      })
+    } else {
+      $(this).popover({
+        placement: 'left',
+        trigger: 'hover'
+      })
+    }
   });
 
   $.datetimepicker.setLocale('ru');
