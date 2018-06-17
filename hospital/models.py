@@ -93,7 +93,7 @@ class Parameter(AbstractTimestampModel):
     name = models.CharField(max_length=30, verbose_name=pgettext_lazy('model_field', 'Name'))
     description = models.TextField(verbose_name=pgettext_lazy('model_field', 'Description'))
     field_type = models.IntegerField(choices=PARAMETER_TYPES, verbose_name=pgettext_lazy('model_field', 'Type'))
-    extra_params = json.JSONField(default=dict, verbose_name=pgettext_lazy('model_field', 'Extra Parameters'))
+    extra_params = json.JSONField(default=dict, verbose_name=pgettext_lazy('model_field', 'Extra Parameters'), blank=True)
 
     class Meta:
         verbose_name = pgettext_lazy('model_name', 'Parameter')
@@ -103,7 +103,7 @@ class Parameter(AbstractTimestampModel):
         return self.name
 
     def clean(self):
-        cleaned_data = super().clean()
+        super().clean()
         available = []
         errors = defaultdict(list)
         if self.field_type in self.REQUIRED:
@@ -139,7 +139,6 @@ class Parameter(AbstractTimestampModel):
             )
         if errors:
             raise ValidationError(errors)
-        return cleaned_data
 
 
 class ParameterValue(AbstractTimestampModel):

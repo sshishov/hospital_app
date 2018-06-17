@@ -616,3 +616,7 @@ footer.sticky-footer {
   /*-ms-transform: rotate(45deg);*/
   /*transform: rotate(45deg);*/
 /*}*/
+
+table#patientHistoryTable th {
+  text-align: center;
+}

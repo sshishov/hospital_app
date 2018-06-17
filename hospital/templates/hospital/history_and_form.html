@@ -39,8 +39,9 @@
               {% if perms.hospital.supervise_application %}
               <th class="patientHistoryCol_Doctor">{% trans 'Doctor' context "model_name" %}</th>
               {% endif %}
-              <th>{% trans 'Applications' context "model_name" %}</th>
-              <th class="patientHistoryCol_Date">{% trans 'Added' context "model_field" %}</th>
+              <th class="patientHistoryCol_Form">{% trans "Form" context "model_name" %}</th>
+              <th>{% trans "Applications" context "model_name" %}</th>
+              <th class="patientHistoryCol_Date">{% trans "Added" context "model_field" %}</th>
             </tr>
           </thead>
           <tbody>
@@ -49,6 +50,7 @@
               {% if perms.hospital.supervise_application %}
               <td>{{ history.doctor.get_full_name }}</td>
               {% endif %}
+              <td>{{ history.form.code }}</td>
               <td>
                 {% for value in history.values %}
                 {% autoescape off %}

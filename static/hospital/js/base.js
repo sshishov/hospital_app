@@ -7,6 +7,7 @@ $(document).ready(function() {
     },
     columnDefs: [
         { targets: 'patientHistoryCol_Doctor', width: '160px'},
+        { targets: 'patientHistoryCol_Form', width: '100px'},
         { targets: 'patientHistoryCol_Date', width: '140px'}
     ]
   });
