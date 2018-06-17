@@ -1,7 +1,5 @@
 from django import forms
 
-from multiselectfield.forms.fields import MultiSelectFormField
-
 from . import widgets
 from .. import utils
 
@@ -76,5 +74,5 @@ class HospitalSelectField(HospitalSelectMixin, forms.ChoiceField):
     widget = widgets.HospitalSelect
 
 
-class HospitalSelectMultipleField(HospitalSelectMixin, MultiSelectFormField):
+class HospitalSelectMultipleField(HospitalSelectMixin, forms.MultipleChoiceField):
     widget = widgets.HospitalMultiSelect
